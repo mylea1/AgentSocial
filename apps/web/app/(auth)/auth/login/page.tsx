@@ -28,6 +28,7 @@ import {
 import { toast } from '@/hooks/use-toast';
 import { analytics } from '@/lib/analytics';
 import { LoginConversionKpiReadout } from '@/components/LoginConversionKpiReadout';
+import EmailLogin from '@/components/auth/EmailLogin';
 
 const loginReadinessItems = [
   {
@@ -253,6 +254,7 @@ function LoginContent() {
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
+          {process.env.NEXT_PUBLIC_ENABLE_EMAIL_AUTH === 'true' && <EmailLogin />}
           <Button
             data-testid="sso-google-btn"
             variant="outline"

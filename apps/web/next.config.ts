@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
 
   // Enable experimental features for Next.js 16
   experimental: {
+    // Keep local builds within memory limits while Docker/Supabase are running.
+    cpus: 2,
     // TypeScript 7 does not expose the compiler API Next uses by default.
     // Delegate build-time type validation to the installed TypeScript CLI.
     useTypeScriptCli: true,

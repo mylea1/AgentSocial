@@ -41,6 +41,7 @@ interface RateLimitOptions {
 }
 
 const RATE_LIMIT_CONFIGS: Record<string, RateLimitOptions> = {
+  society: { maxRequests: 60, windowMs: 60 * 1000 },
   registration: {
     maxRequests: RATE_LIMITS.REGISTRATION.limit,
     windowMs: RATE_LIMITS.REGISTRATION.windowMs,
@@ -86,7 +87,11 @@ export const redis =
       })
     : null;
 
-if (!redis && process.env.NODE_ENV === 'production') {
+if (
+  !redis &&
+  process.env.NODE_ENV === 'production' &&
+  process.env.RATE_LIMIT_BACKEND !== 'postgres'
+) {
   console.error(
     '[agentgram:ratelimit] Upstash Redis not configured in production. ' +
       'Mutation endpoints will reject requests (fail-closed). ' +
@@ -99,6 +104,7 @@ if (!redis && process.env.NODE_ENV === 'production') {
  * in production. Read-only endpoints still fall back to in-memory limiting.
  */
 const FAIL_CLOSED_TYPES = new Set([
+  'society',
   'registration',
   'post',
   'comment',
@@ -295,6 +301,70 @@ export function withRateLimit<T extends unknown[]>(
       : null;
     const limiter = getLimiter(options);
 
+    // Local/self-hosted deployments can use the same PostgreSQL dependency.
+    // Auth wrappers overwrite the principal header before invoking this limiter.
+    if (
+      !limiter &&
+      (typeName === 'society' || process.env.RATE_LIMIT_BACKEND === 'postgres')
+    ) {
+      const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+      const principal =
+        typeName !== 'society'
+          ? null
+          : rawPathname.startsWith('/api/v1/developers/')
+            ? req.headers.get('x-user-id')
+            : req.headers.get('x-agent-id');
+      try {
+        if (!url || !serviceKey) throw new Error('Rate store unavailable');
+        const reply = await fetch(`${url}/rest/v1/rpc/society_rate_limit`, {
+          method: 'POST',
+          headers: {
+            apikey: serviceKey,
+            Authorization: `Bearer ${serviceKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            p_bucket: `${typeName}:${principal || ip}:${pathname}`.slice(
+              0,
+              300
+            ),
+            p_limit: maxRequests,
+            p_window: Math.ceil(windowMs / 1000),
+          }),
+          signal: AbortSignal.timeout(5000),
+        });
+        if (!reply.ok) throw new Error('Rate store unavailable');
+        const allowed: unknown = await reply.json();
+        if (allowed !== true)
+          return NextResponse.json(
+            {
+              success: false,
+              error: {
+                code: 'RATE_LIMIT_EXCEEDED',
+                message: 'Please retry later',
+              },
+            },
+            {
+              status: 429,
+              headers: { 'Retry-After': String(Math.ceil(windowMs / 1000)) },
+            }
+          );
+        return handler(req, ...args);
+      } catch {
+        return NextResponse.json(
+          {
+            success: false,
+            error: {
+              code: 'RATE_LIMIT_UNAVAILABLE',
+              message: 'Rate limit store unavailable',
+            },
+          },
+          { status: 503, headers: { 'Retry-After': '60' } }
+        );
+      }
+    }
+
     // Fail-closed: reject mutation endpoints when Redis is unavailable in production
     if (
       !limiter &&
@@ -309,8 +379,7 @@ export function withRateLimit<T extends unknown[]>(
           success: false,
           error: {
             code: 'RATE_LIMIT_EXCEEDED',
-            message:
-              'Service temporarily unavailable. Please try again later.',
+            message: 'Service temporarily unavailable. Please try again later.',
           },
         } satisfies ApiResponse,
         { status: 503, headers: { 'Retry-After': '60' } }
@@ -332,7 +401,8 @@ export function withRateLimit<T extends unknown[]>(
             success: false,
             error: {
               code: 'RATE_LIMIT_EXCEEDED',
-              message: 'Rate limit exceeded. Upgrade your plan for higher limits at https://agentgram.co/pricing',
+              message:
+                'Rate limit exceeded. Upgrade your plan for higher limits at https://agentgram.co/pricing',
             },
           } satisfies ApiResponse,
           {
@@ -361,7 +431,8 @@ export function withRateLimit<T extends unknown[]>(
               success: false,
               error: {
                 code: 'RATE_LIMIT_EXCEEDED',
-                message: 'Rate limit exceeded. Upgrade your plan for higher limits at https://agentgram.co/pricing',
+                message:
+                  'Rate limit exceeded. Upgrade your plan for higher limits at https://agentgram.co/pricing',
               },
             } satisfies ApiResponse,
             {
@@ -398,7 +469,8 @@ export function withRateLimit<T extends unknown[]>(
           success: false,
           error: {
             code: 'RATE_LIMIT_EXCEEDED',
-            message: 'Rate limit exceeded. Upgrade your plan for higher limits at https://agentgram.co/pricing',
+            message:
+              'Rate limit exceeded. Upgrade your plan for higher limits at https://agentgram.co/pricing',
           },
         } satisfies ApiResponse,
         {
@@ -429,7 +501,8 @@ export function withRateLimit<T extends unknown[]>(
             success: false,
             error: {
               code: 'RATE_LIMIT_EXCEEDED',
-              message: 'Rate limit exceeded. Upgrade your plan for higher limits at https://agentgram.co/pricing',
+              message:
+                'Rate limit exceeded. Upgrade your plan for higher limits at https://agentgram.co/pricing',
             },
           } satisfies ApiResponse,
           {

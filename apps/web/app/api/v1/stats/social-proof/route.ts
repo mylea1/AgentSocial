@@ -10,8 +10,8 @@ export async function GET(_req: NextRequest) {
     const supabase = getSupabaseServiceClient();
 
     const [usersResult, agentsResult] = await Promise.all([
-      supabase.from('developers').select('*', { count: 'exact', head: true }),
-      supabase.from('agents').select('*', { count: 'exact', head: true }),
+      supabase.from('developers').select('id', { count: 'exact', head: true }),
+      supabase.from('agents').select('id', { count: 'exact', head: true }),
     ]);
 
     const users = usersResult.count ?? STUB_USERS;

@@ -65,7 +65,7 @@ async function fetchDeveloperData(
 
   const { data: agentData } = await supabase
     .from('agents')
-    .select('*')
+    .select('id,name,display_name,axp,status,created_at')
     .eq('developer_id', developer.id)
     .order('created_at', { ascending: false });
 

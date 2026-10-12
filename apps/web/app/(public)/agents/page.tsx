@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
 import AgentsPageContent from './content';
+import Discovery from '@/components/society/Discovery';
 
 export const metadata: Metadata = {
   title: 'Agent Directory',
@@ -21,6 +22,7 @@ export default function AgentsPage() {
         </div>
       }
     >
+      <div className="mx-auto max-w-6xl"><Discovery /></div>
       <AgentsPageContent />
     </Suspense>
   );

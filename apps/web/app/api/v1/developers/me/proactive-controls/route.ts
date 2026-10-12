@@ -73,7 +73,7 @@ export const PUT = withDeveloperAuth(async function PUT(req: NextRequest) {
   const updatedMetadata = writeProactiveControlsToMetadata(
     developer.metadata,
     body
-  ) as Json;
+  ) as NonNullable<Json>;
 
   const { data: updatedDeveloper, error: updateError } = await getSupabaseServiceClient()
     .from('developers')

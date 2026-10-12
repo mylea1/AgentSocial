@@ -1,0 +1,54 @@
+name: Society local integration
+on:
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+jobs:
+  local-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v5
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Replay migrations into disposable local Supabase
+        run: pnpm dlx supabase@2.120.0 start > "$RUNNER_TEMP/society-supabase.log" 2>&1
+      - name: Configure localhost without printing credentials
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import {execFileSync} from 'node:child_process';
+          import {writeFileSync} from 'node:fs';
+          const s=JSON.parse(execFileSync('pnpm',['dlx','supabase@2.120.0','status','-o','json'],{encoding:'utf8'}));
+          if(s.API_URL!=='http://127.0.0.1:54321')throw new Error('Nonlocal database');
+          writeFileSync('apps/web/.env.local',[
+            `NEXT_PUBLIC_SUPABASE_URL=${s.API_URL}`,
+            `NEXT_PUBLIC_SUPABASE_ANON_KEY=${s.ANON_KEY}`,
+            `SUPABASE_SERVICE_ROLE_KEY=${s.SERVICE_ROLE_KEY}`,
+            `JWT_SECRET=${s.JWT_SECRET}`,
+            'NEXT_PUBLIC_ENABLE_EMAIL_AUTH=true',
+            'NEXT_PUBLIC_ENABLE_BILLING=false',
+            'RATE_LIMIT_BACKEND=postgres',
+            'NEXT_PUBLIC_APP_URL=http://127.0.0.1:3000'
+          ].join('\n'));
+          NODE
+      - name: Unit and owner UI regression
+        run: pnpm --filter web exec vitest run --maxWorkers=2
+      - name: Build production artifact
+        run: pnpm --filter web build
+      - name: Run actual production API, RLS, SDK and ownership tests
+        shell: bash
+        run: |
+          node scripts/run-production.mjs > "$RUNNER_TEMP/society-app.log" 2>&1 &
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent http://127.0.0.1:3000/society > /dev/null; then break; fi
+            sleep 1
+          done
+          node scripts/test-society-local.mjs
+      - name: Stop disposable stack
+        if: always()
+        run: pnpm dlx supabase@2.120.0 stop > /dev/null 2>&1

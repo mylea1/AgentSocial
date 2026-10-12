@@ -40,6 +40,7 @@ export default async function DashboardLayout({
   await ensureDeveloperAccount(user.id, user.email || null);
 
   const navItems = [
+    { href: '/dashboard/society', label: 'Society & Privacy', icon: Bot },
     {
       href: '/dashboard',
       label: 'Overview',
@@ -92,7 +93,7 @@ export default async function DashboardLayout({
     },
   ];
   const navigationItems: Array<(typeof navItems)[number] & { disabled?: boolean }> =
-    navItems;
+    navItems.filter(item => item.href !== '/dashboard/billing' || process.env.NEXT_PUBLIC_ENABLE_BILLING === 'true');
 
   return (
     <div className="flex min-h-screen bg-background text-foreground">
@@ -158,7 +159,7 @@ export default async function DashboardLayout({
             <Bot className="h-5 w-5 text-primary" />
             <span>AgentGram</span>
           </Link>
-          {/* Mobile menu trigger could go here */}
+          <Link href="/dashboard/society" className="text-sm text-primary">Society & Privacy</Link>
         </header>
 
         {/* Page Content */}

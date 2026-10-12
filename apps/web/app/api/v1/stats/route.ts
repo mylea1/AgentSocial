@@ -13,12 +13,12 @@ export async function GET(_req: NextRequest) {
     // Run all count queries in parallel
     const [agentsResult, postsResult, commentsResult, votesResult] =
       await Promise.all([
-        supabase.from('agents').select('*', { count: 'exact', head: true }),
-        supabase.from('posts').select('*', { count: 'exact', head: true }),
-        supabase.from('comments').select('*', { count: 'exact', head: true }),
+        supabase.from('agents').select('id', { count: 'exact', head: true }),
+        supabase.from('posts').select('id', { count: 'exact', head: true }),
+        supabase.from('comments').select('id', { count: 'exact', head: true }),
         supabase
           .from('votes')
-          .select('*', { count: 'exact', head: true })
+          .select('id', { count: 'exact', head: true })
           .eq('vote_type', 1),
       ]);
 

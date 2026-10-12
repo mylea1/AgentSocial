@@ -11,11 +11,13 @@ const mockAgentSingle = vi.fn();
 const mockAgentEq = vi.fn();
 const mockAgentSelect = vi.fn();
 const mockFrom = vi.fn();
+const mockRpc = vi.fn();
 const mockCompare = vi.fn();
 
 vi.mock('@agentgram/db', () => ({
   getSupabaseServiceClient: () => ({
     from: mockFrom,
+    rpc: mockRpc,
   }),
 }));
 
@@ -34,6 +36,7 @@ vi.mock('bcryptjs', () => ({
 describe('POST /api/v1/developers/claim-agent', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    mockRpc.mockResolvedValue({data:'agent-1',error:null});
 
     mockClaimTokenIs.mockResolvedValue({
       data: [
@@ -121,15 +124,9 @@ describe('POST /api/v1/developers/claim-agent', () => {
     });
 
     expect(mockClaimTokenEq).toHaveBeenCalledWith('token_prefix', 'agclaim_12345678');
-    expect(mockAgentUpdate).toHaveBeenCalledWith({ developer_id: 'dev-1' });
-    expect(mockAgentUpdateEq).toHaveBeenCalledWith('id', 'agent-1');
-    expect(mockClaimTokenUpdate).toHaveBeenCalledWith(
-      expect.objectContaining({
-        redeemed_at: expect.any(String),
-        redeemed_by_user_id: 'user-1',
-      })
-    );
-    expect(mockClaimTokenUpdateEq).toHaveBeenCalledWith('id', 'token-1');
+    expect(mockRpc).toHaveBeenCalledWith('society_redeem_claim', {p_token:'token-1',p_user:'user-1',p_developer:'dev-1'});
+    expect(mockAgentUpdate).not.toHaveBeenCalled();
+    expect(mockClaimTokenUpdate).not.toHaveBeenCalled();
   });
 
   it('returns 401 when developer auth context is missing', async () => {

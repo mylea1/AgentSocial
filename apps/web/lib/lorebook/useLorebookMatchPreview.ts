@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import type { MatchedLorebookEntry } from '@/app/api/v1/agents/[agentId]/lorebook/preview/route';
+import type { MatchedLorebookEntry } from '@/app/api/v1/agents/[id]/lorebook/preview/route';
 
 interface UseLorebookMatchPreviewState {
   entries: MatchedLorebookEntry[];

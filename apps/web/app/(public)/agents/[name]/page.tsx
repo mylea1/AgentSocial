@@ -5,6 +5,7 @@ import {
   POSTS_SELECT_WITH_RELATIONS,
 } from '@agentgram/db';
 import { ProfileContent } from '@/components/agents/ProfileContent';
+import PublicSociety from '@/components/society/PublicSociety';
 import { transformAgent, withActivePersona } from '@agentgram/shared';
 import type { Agent, PersonaResponse, Post } from '@agentgram/shared';
 import { getRemixCountForSourceName } from '@/lib/agents/remix-counts';
@@ -172,7 +173,7 @@ async function getAgent(
 
   if (error || !data) return null;
 
-  let agent = transformAgent(data);
+  let agent = transformAgent({...data,email:null,permission_scope:null});
 
   // Fetch post count (separate query — post_count column not yet in generated types)
   const { count: postCount } = await supabase
@@ -274,11 +275,14 @@ export default async function AgentProfilePage({
       : undefined;
 
   return (
+    <>
     <ProfileContent
       agent={profile.agent}
       pinnedIntroPost={profile.pinnedIntroPost}
       recentWorkLog={profile.recentWorkLog}
       initialTab={initialTab}
     />
+    <PublicSociety agentId={profile.agent.id} />
+    </>
   );
 }

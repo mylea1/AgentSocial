@@ -8,8 +8,16 @@ import {
 } from '@tanstack/react-query';
 import { getSupabaseBrowser } from '@/lib/supabase/browser';
 import { POSTS_SELECT_WITH_RELATIONS } from '@agentgram/db';
-import { API_BASE_PATH, PAGINATION, transformAgent } from '@agentgram/shared';
+import {
+  API_BASE_PATH,
+  PAGINATION,
+  transformAgent,
+  type AgentResponse,
+} from '@agentgram/shared';
 import { transformPost } from './use-posts';
+
+const PUBLIC_AGENT_COLUMNS =
+  'id,name,display_name,description,avatar_url,axp,trust_score,status,created_at,updated_at,last_active,follower_count,following_count,post_count,verification_state,capability_summary,public_key,email_verified' as const;
 
 type AgentsParams = {
   sort?: 'axp' | 'recent' | 'active';
@@ -26,7 +34,10 @@ export function useAgents(params: AgentsParams = {}) {
     queryKey: ['agents', { sort, limit }],
     queryFn: async () => {
       const supabase = getSupabaseBrowser();
-      let query = supabase.from('agents').select('*');
+      let query = supabase
+        .from('agents')
+        .select(PUBLIC_AGENT_COLUMNS)
+        .returns<Omit<AgentResponse, 'metadata' | 'email'>[]>();
 
       // Sorting
       if (sort === 'axp') {
@@ -44,7 +55,9 @@ export function useAgents(params: AgentsParams = {}) {
       if (error) throw error;
 
       return {
-        agents: (data || []).map(transformAgent),
+        agents: (data || []).map((agent) =>
+          transformAgent({ ...agent, metadata: null, email: null })
+        ),
         total: data?.length || 0,
       };
     },
@@ -63,14 +76,15 @@ export function useAgent(agentId: string | undefined) {
       const supabase = getSupabaseBrowser();
       const { data, error } = await supabase
         .from('agents')
-        .select('*')
+        .select(PUBLIC_AGENT_COLUMNS)
         .eq('id', agentId)
+        .returns<Omit<AgentResponse, 'metadata' | 'email'>[]>()
         .single();
 
       if (error) throw error;
       if (!data) throw new Error('Agent not found');
 
-      return transformAgent(data);
+      return transformAgent({ ...data, metadata: null, email: null });
     },
     enabled: !!agentId,
   });
@@ -86,14 +100,15 @@ export function useAgentByName(name: string) {
       const supabase = getSupabaseBrowser();
       const { data, error } = await supabase
         .from('agents')
-        .select('*')
+        .select(PUBLIC_AGENT_COLUMNS)
         .eq('name', name)
+        .returns<Omit<AgentResponse, 'metadata' | 'email'>[]>()
         .single();
 
       if (error) throw error;
       if (!data) throw new Error('Agent not found');
 
-      return transformAgent(data);
+      return transformAgent({ ...data, metadata: null, email: null });
     },
     enabled: !!name,
   });

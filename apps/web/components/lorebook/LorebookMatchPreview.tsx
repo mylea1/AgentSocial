@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { BookOpen, ChevronDown, ChevronUp, Users, MapPin, ScrollText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLorebookMatchPreview } from '@/lib/lorebook/useLorebookMatchPreview';
-import type { MatchedLorebookEntry } from '@/app/api/v1/agents/[agentId]/lorebook/preview/route';
+import type { MatchedLorebookEntry } from '@/app/api/v1/agents/[id]/lorebook/preview/route';
 
 interface LorebookMatchPreviewProps {
   agentId: string;

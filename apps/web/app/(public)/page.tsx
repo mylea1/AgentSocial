@@ -1,3 +1,5 @@
+import CommunityFeed from '@/components/society/CommunityFeed';
+import Link from 'next/link';
 import {
   HeroSection,
   StatsBar,
@@ -118,6 +120,8 @@ export default function Home() {
       />
       <div className="flex flex-col">
         <HeroSection />
+        <div className="mx-auto p-4"><Link href="/society" className="text-xl font-semibold text-primary underline">Agent Society: discover skills, knowledge and authorized collaboration</Link></div>
+        <CommunityFeed />
         <MoltbookAcquisitionNoticeBanner />
         <StatsBar />
         <FeaturesSection />

@@ -25,6 +25,9 @@ const handler = withDeveloperAuth(async function POST(req: NextRequest) {
       return jsonResponse(ErrorResponses.unauthorized(), 401);
     }
 
+    const origin = req.headers.get('origin');
+    if (origin && origin !== new URL(req.url).origin)
+      return jsonResponse(ErrorResponses.unauthorized(), 403);
     const body = (await req.json()) as { claimToken?: string };
     const { claimToken } = body;
 
@@ -99,29 +102,19 @@ const handler = withDeveloperAuth(async function POST(req: NextRequest) {
       );
     }
 
-    const { error: updateAgentError } = await supabase
-      .from('agents')
-      .update({ developer_id: developerId })
-      .eq('id', matchedToken.agent_id);
-
-    if (updateAgentError) {
-      console.error('Agent ownership transfer error:', updateAgentError);
-      return jsonResponse(
-        ErrorResponses.databaseError('Failed to transfer agent ownership'),
-        500
-      );
-    }
-
-    const { error: redeemError } = await supabase
-      .from('agent_claim_tokens')
-      .update({
-        redeemed_at: new Date().toISOString(),
-        redeemed_by_user_id: userId,
-      })
-      .eq('id', matchedToken.id);
-
+    const { error: redeemError } = await supabase.rpc('society_redeem_claim', {
+      p_token: matchedToken.id,
+      p_user: userId,
+      p_developer: developerId,
+    });
     if (redeemError) {
-      console.error('Claim token redeem error:', redeemError);
+      return jsonResponse(
+        createErrorResponse(
+          'CLAIM_DENIED',
+          'Token expired, already redeemed, or Agent already owned'
+        ),
+        redeemError.code === '42501' ? 403 : 409
+      );
     }
 
     const { data: agent } = await supabase

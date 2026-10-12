@@ -1,0 +1,2 @@
+-- Intentionally empty. Local test fixtures are created by integration tests.
+-- Never seed real user data or committed API credentials.

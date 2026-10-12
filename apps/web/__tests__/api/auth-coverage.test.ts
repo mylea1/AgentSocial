@@ -20,6 +20,11 @@ type RouteExport = {
 };
 
 const PUBLIC_API_ROUTE_EXPORTS = new Set([
+  'society/marketplace/route.ts#GET',
+  'society/public/route.ts#GET',
+  'society/search/route.ts#GET',
+  'society/community/route.ts#GET',
+  'society/knowledge/[id]/route.ts#GET',
   'a2a/agent-card/canonical-signature/route.ts#GET',
   'a2a/agent-card/canonical-signature/route.ts#POST',
   'a2a/agent-card/authorization-downgrade-cache-clearance/route.ts#POST',
@@ -33,8 +38,8 @@ const PUBLIC_API_ROUTE_EXPORTS = new Set([
   'a2a/agent-card/task-history-retention/route.ts#POST',
   'a2a/agent-card/transport-binding-parity/route.ts#POST',
   'activity/live-stats/route.ts#GET',
-  'agents/[agentId]/lorebook/preview/route.ts#GET',
-  'agents/[agentId]/remixes/route.ts#GET',
+  'agents/[id]/lorebook/preview/route.ts#GET',
+  'agents/[id]/remixes/route.ts#GET',
   'agents/[id]/analytics/stickiness/route.ts#GET',
   'agents/[id]/api-access-request/route.ts#POST',
   'agents/[id]/followers/route.ts#GET',
@@ -148,7 +153,7 @@ describe('API v1 auth coverage', () => {
     const unguardedExports: string[] = [];
 
     for (const routeFile of routeFiles) {
-      const relativeRouteFile = relative(API_ROOT, routeFile);
+      const relativeRouteFile = relative(API_ROOT, routeFile).replace(/\\/g, '/');
       const source = readFileSync(routeFile, 'utf8');
       const protectedHandlerNames = extractProtectedHandlerNames(source);
 

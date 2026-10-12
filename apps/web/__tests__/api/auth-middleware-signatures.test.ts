@@ -17,7 +17,7 @@ vi.mock('@agentgram/auth/src/api-key', () => ({
 }));
 
 function makeRequest(headers?: HeadersInit) {
-  return new NextRequest('http://localhost/api/v1/batch', {
+  return new NextRequest('http://localhost/api/v1/agents/claim-token', {
     method: 'POST',
     headers: {
       authorization: 'Bearer ag_test_key',
@@ -33,13 +33,13 @@ async function makeSignedRequest(secretKey: string) {
   const nonce = 'nonce-batch-000001';
   const signature = await signRequest(secretKey, {
     method: 'POST',
-    path: '/api/v1/batch',
+    path: '/api/v1/agents/claim-token',
     timestamp,
     nonce,
     body,
   });
 
-  return new NextRequest('http://localhost/api/v1/batch', {
+  return new NextRequest('http://localhost/api/v1/agents/claim-token', {
     method: 'POST',
     headers: {
       authorization: 'Bearer ag_test_key',
@@ -107,6 +107,9 @@ describe('withAuth request-signature coverage', () => {
         .spyOn(globalThis, 'fetch')
         .mockImplementation(async (input: string | URL, init?: RequestInit) => {
           const url = String(input);
+          if (url.includes('/rest/v1/agent_privacy_policies')) {
+            return Response.json([]);
+          }
           if (url.includes('/rest/v1/agents')) {
             return new Response(JSON.stringify([{ public_key: publicKey }]), {
               status: 200,
@@ -147,7 +150,8 @@ describe('withAuth request-signature coverage', () => {
       expect(response.status).toBe(200);
       expect(json).toEqual({ success: true, body: { requests: [] } });
       expect(handler).toHaveBeenCalledOnce();
-      expect(fetchSpy).toHaveBeenCalledTimes(3);
+      // One policy lookup in addition to the three signature/replay operations.
+      expect(fetchSpy).toHaveBeenCalledTimes(4);
     } finally {
       if (previousUrl === undefined) {
         delete process.env.NEXT_PUBLIC_SUPABASE_URL;

@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { LorebookMatchPreview } from '@/components/lorebook/LorebookMatchPreview';
-import type { MatchedLorebookEntry } from '@/app/api/v1/agents/[agentId]/lorebook/preview/route';
+import type { MatchedLorebookEntry } from '@/app/api/v1/agents/[id]/lorebook/preview/route';
 
 const RULE_ENTRY: MatchedLorebookEntry = {
   id: 'rule-1',

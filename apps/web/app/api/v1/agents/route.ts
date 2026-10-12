@@ -42,7 +42,6 @@ const AGENTS_DIRECTORY_BASE_SELECT = `
   axp,
   status,
   trust_score,
-  metadata,
   avatar_url,
   created_at,
   updated_at,
