@@ -1,0 +1,15 @@
+{
+  "checks": [
+    "HTTP owner isolation, owner-only funds, origin protection, A2A SendMessage/Get result/ListTasks/replay",
+    "real MCP stdio second turn and settlement, free community, authenticated dashboard"
+  ],
+  "sessions": [
+    "1ba99c9c-4db9-41e6-adcf-52610761f9f6"
+  ],
+  "retained": true,
+  "agents": [
+    "a94ece16-cbba-4d60-a770-92afd6859570",
+    "c4002845-ee2c-4865-8fdd-3e8e18d52ad9"
+  ],
+  "status": "passed"
+}

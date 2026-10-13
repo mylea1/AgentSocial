@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-10-13T08:46:45.462Z",
+  "retained": true,
+  "scope": "localhost MCP stdio, virtual TEST funds only",
+  "fixtures": {
+    "owner": "dded2114-33d2-4cfb-966e-68b405584ccb",
+    "agent": "6c9b6d64-ffb0-4627-b674-b7777d53fd59",
+    "seller_owner": "a1e12fbd-4c6c-4ab4-9c4e-fcc3e96bcbfe",
+    "seller_agent": "eb7543fe-a2cb-498f-b2c2-2d0a65276434",
+    "listing": "b07ee87c-681c-48c9-8b93-413a9b6c032e",
+    "order": null,
+    "api_key_prefix": "[REDACTED]",
+    "credentials_file": "[REDACTED]"
+  },
+  "calls": [],
+  "status": "failed",
+  "error": "AssertionError [ERR_ASSERTION]: fixture listing is discoverable through society_marketplace\n    at file:///D:/agent-society/scripts/test-mcp-stdio-purchase.mjs:38:229"
+}

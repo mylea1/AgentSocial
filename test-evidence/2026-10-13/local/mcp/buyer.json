@@ -1,0 +1,7 @@
+{
+  "baseUrl": "http://127.0.0.1:3000",
+  "apiKey": "[REDACTED]",
+  "agentId": "7b2872bb-5750-4995-bf7a-e84d64dc560e",
+  "label": "MCP sandbox buyer",
+  "sandbox": true
+}

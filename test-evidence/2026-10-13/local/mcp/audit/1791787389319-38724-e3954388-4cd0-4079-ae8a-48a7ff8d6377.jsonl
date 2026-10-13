@@ -1,0 +1,2 @@
+{"at":"2026-10-12T06:43:09.354Z","agent_id":"7b2872bb-5750-4995-bf7a-e84d64dc560e","call_id":"56c15d74-19ab-4254-bcc5-1931ffd5e937","phase":"request","tool":"society_search","arguments":{"q":"PostgreSQL","tag":"","page":1}}
+{"at":"2026-10-12T06:43:09.478Z","agent_id":"7b2872bb-5750-4995-bf7a-e84d64dc560e","call_id":"56c15d74-19ab-4254-bcc5-1931ffd5e937","phase":"response","tool":"society_search","data":{"results":[],"page":1,"total":0}}

@@ -122,3 +122,14 @@ For each completed stage record: changed files; functional behavior; migration
 names and verification; commands/results; unfinished work; risks; next tasks.
 Do not advance a stage's acceptance status just because code compiles. Database
 and cross-user integration checks are mandatory release gates.
+
+## 2026-10-13 trusted inference implementation plan
+Baseline: main 0f28b512, clean before this work. Existing Next.js 16 / React 19 / Supabase application uses owner-cookie auth, verified Agent API credentials and transactional Society RPCs. Public knowledge, publication approval, contacts, messaging, notifications and marketplace sandbox are reusable. Existing A2A card attestations are not a task runtime. Existing subscription billing is separate.
+Missing dependencies: service registry, immutable quotes, owner budget grants, durable model jobs, gateway-verified usage, reservation ledger, 10% commission, refunds, invoice UI and A2A runtime authorization. No model credential is assumed; only an explicitly labelled MockModelProvider may execute initially.
+Dependency order: (1) exact money/usage and protocol validation; (2) RLS-protected registry, sessions, durable calls and balanced ledger; (3) owner and Agent APIs; (4) gateway and A2A transport; (5) owner/public UI and MCP tools; (6) retained integration/security tests; (7) testnet-only payment readiness. Real payments remain off.
+Planned relation graph: agents -> inference_services -> inference_sessions -> inference_calls; developers -> ledger accounts -> balanced vouchers/entries; sessions reference both owner snapshots and pricing versions. No client writes usage or ledger entries.
+Flow: discover -> immutable quote -> provider approval -> payer cap approval -> reserve -> bounded gateway calls -> verified usage -> settle once -> 90% earnings/10% fee -> unused release -> invoice. Contact permission never implies spending permission.
+See INFERENCE_BILLING.md, PRIVACY_AND_PERMISSIONS.md, PAYMENT_ROADMAP.md and SECURITY_THREAT_MODEL.md. This is a plan, not a claim that the missing modules already exist. Completion evidence will be recorded separately.
+
+## Implemented local inference slice — 2026-10-13
+The planned local mock slice now has migrations 20261016000000–008: opt-in services, immutable quotes, both-owner approvals, configurable owner/Agent budgets, reservation, durable calls, append-only balanced ledger, 90/10 settlement, refunds, invoices, public discovery, A2A task listing/cancellation and PostgreSQL cron recovery. Owner and Agent HTTP routes, four MCP tools and public/owner pages are implemented. See [INFERENCE_TESTING.md](INFERENCE_TESTING.md) for actual interfaces, retained evidence, commands and explicit limitations. Real payment/model-provider integration remains unimplemented and disabled; x402 is testnet wire preparation only.

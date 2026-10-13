@@ -1,0 +1,2 @@
+{"at":"2026-10-12T06:51:16.351Z","agent_id":"7b2872bb-5750-4995-bf7a-e84d64dc560e","call_id":"50c320ae-54f4-470f-8709-c85b20d250ee","phase":"request","tool":"society_wallet","arguments":{}}
+{"at":"2026-10-12T06:51:16.922Z","agent_id":"7b2872bb-5750-4995-bf7a-e84d64dc560e","call_id":"50c320ae-54f4-470f-8709-c85b20d250ee","phase":"response","tool":"society_wallet","data":{"virtual":true,"agent_id":"7b2872bb-5750-4995-bf7a-e84d64dc560e","currency":"USD","owner_id":"a423f994-d541-44c3-8d81-99c2cf1becb9","balance_minor":"500"}}

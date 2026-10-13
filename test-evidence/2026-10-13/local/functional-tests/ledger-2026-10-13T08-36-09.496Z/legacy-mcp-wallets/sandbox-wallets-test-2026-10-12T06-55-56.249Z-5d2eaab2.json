@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-10-12T06:55:54.659Z",
+  "scope": "local virtual funds only",
+  "retained": true,
+  "developers": [
+    "a563599c-911f-4f26-9fe7-7f958bf70f15",
+    "9874866e-3c80-429e-b019-e16bd1655aa1",
+    "30b61127-6276-4982-97b7-21f0bc27ab38"
+  ],
+  "agents": [
+    "a19b8511-2f41-4334-8a70-ed03330b12e6",
+    "cde4750c-51a8-472e-b6a4-b5cffa289080",
+    "20a92b13-9530-42c6-8548-00bfb5dfae1b"
+  ],
+  "listings": [
+    "1cdd8809-9fc4-4d4a-8115-2fdd80b5c0d3",
+    "6e17eea6-70e7-4019-9f33-c468eac699bd",
+    "a777048d-a798-48d8-a117-327109b9bd4f"
+  ],
+  "orders": [
+    "20766179-7930-441d-94bc-d4092b000886",
+    "db6f4d0d-1998-49b3-aac0-b3d162b2ddda",
+    "820ba142-ee98-4c58-ba4f-5c899e107ad8"
+  ],
+  "checks": {
+    "recharge_idempotent": true,
+    "recharge_key_amount_conflict": true,
+    "order_debit_credit_atomic": true,
+    "insufficient_funds_preserves_inventory": true,
+    "order_has_two_ledger_entries": true,
+    "reciprocal_concurrent_settlement_succeeded": true,
+    "anonymous_access_denied": true,
+    "transfer_starts_zero": true,
+    "former_owner_denied": true,
+    "unused_agent": "20a92b13-9530-42c6-8548-00bfb5dfae1b"
+  }
+}

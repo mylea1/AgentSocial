@@ -1,0 +1,56 @@
+{
+  "startedAt": "2026-10-13T08:42:51.802Z",
+  "retained": true,
+  "mode": "backend-created durable RUNNING call; no real model invocation or slow response",
+  "checks": [
+    {
+      "name": "A2A GetTask exposes backend-created RUNNING as WORKING",
+      "passed": true,
+      "taskId": "9ae1ecfa-1cc3-42fb-84e5-97510343bc1c",
+      "taskState": "TASK_STATE_WORKING"
+    },
+    {
+      "name": "unrelated Agent cannot GetTask or CancelTask",
+      "passed": true,
+      "getError": "Task not found",
+      "cancelError": "Task not found"
+    },
+    {
+      "name": "A2A CancelTask transitions WORKING to CANCELED",
+      "passed": true,
+      "taskState": "TASK_STATE_CANCELED"
+    },
+    {
+      "name": "late inference_complete is rejected after cancellation",
+      "passed": true,
+      "errorCode": "40001"
+    },
+    {
+      "name": "canceled call remains uncharged",
+      "passed": true,
+      "callState": "CANCELED",
+      "callCost": "0",
+      "sessionCharge": "0"
+    }
+  ],
+  "sessions": [
+    "9a94f0d1-20ef-476d-93e9-de48c335472e"
+  ],
+  "agents": {
+    "buyer": "46f61bf7-ef94-4832-898c-e7df86f7522e",
+    "seller": "2ccda870-b7da-4e8e-a3ad-f724eb2b5c3e",
+    "unrelated": "6bae1aa0-77d8-402f-8162-08e856f04de7"
+  },
+  "backendFixture": {
+    "taskId": "9ae1ecfa-1cc3-42fb-84e5-97510343bc1c",
+    "session": "9a94f0d1-20ef-476d-93e9-de48c335472e",
+    "createdAs": "RUNNING",
+    "requestKey": "3b0a010a-2292-4401-b8d2-a6881f1ddcf5",
+    "requestDigest": "a9e74ec74954dc6dc7aabccfef85f2208db9e67a3bbbb72efcc1f5c3ad6bc475",
+    "inputBytes": 55,
+    "outputBound": 80
+  },
+  "fatal": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ '10000000000000'\n- '9000000000000'\n",
+  "finishedAt": "2026-10-13T08:42:55.578Z",
+  "status": "failed"
+}

@@ -1,0 +1,1 @@
+PASS: virtual recharge, order settlement, insufficient-funds stock rollback, RLS/RPC isolation, owner-transfer zero balance. Fixture and JSON evidence retained in .local/mcp.

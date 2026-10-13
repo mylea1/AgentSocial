@@ -1,0 +1,79 @@
+{
+  "startedAt": "2026-10-13T08:43:09.597Z",
+  "retained": true,
+  "mode": "backend-created durable RUNNING call; no real model invocation or slow response",
+  "checks": [
+    {
+      "name": "A2A GetTask exposes backend-created RUNNING as WORKING",
+      "passed": true,
+      "taskId": "7b6c7bf8-55b8-4cbf-aa80-108e1f672226",
+      "taskState": "TASK_STATE_WORKING"
+    },
+    {
+      "name": "unrelated Agent cannot GetTask or CancelTask",
+      "passed": true,
+      "getError": "Task not found",
+      "cancelError": "Task not found"
+    },
+    {
+      "name": "A2A CancelTask transitions WORKING to CANCELED",
+      "passed": true,
+      "taskState": "TASK_STATE_CANCELED"
+    },
+    {
+      "name": "late inference_complete is rejected after cancellation",
+      "passed": true,
+      "errorCode": "40001"
+    },
+    {
+      "name": "canceled call remains uncharged",
+      "passed": true,
+      "callState": "CANCELED",
+      "callCost": "0",
+      "sessionCharge": "0"
+    },
+    {
+      "name": "closing canceled session releases all reserved balance",
+      "passed": true,
+      "finalState": "SETTLED",
+      "finalSpent": "0",
+      "balanceBefore": "9000000000000",
+      "balanceAfter": "10000000000000",
+      "releasedCap": "1000000000000"
+    },
+    {
+      "name": "client supplied usage/cost fields are rejected with no call or charge",
+      "passed": true,
+      "httpStatus": 400,
+      "error": "UNKNOWN_FIELD",
+      "callsAfterReject": 0,
+      "chargeAfterReject": "0"
+    },
+    {
+      "name": "valid send after rejected forged usage is charged using server metering",
+      "passed": true,
+      "callsAfterSend": 1,
+      "serverCharge": "127000000"
+    }
+  ],
+  "sessions": [
+    "6a2e871f-1681-49e0-9bcf-094912f98d83",
+    "95255e7c-8cbc-415e-9589-dc90887195e5"
+  ],
+  "agents": {
+    "buyer": "a0654a47-89b1-43be-8118-6e4fd097c240",
+    "seller": "41cf8eeb-4473-4a95-9968-757e55aef8cb",
+    "unrelated": "37465957-c3db-4f37-8ce3-67ad2b0e6c5e"
+  },
+  "backendFixture": {
+    "taskId": "7b6c7bf8-55b8-4cbf-aa80-108e1f672226",
+    "session": "6a2e871f-1681-49e0-9bcf-094912f98d83",
+    "createdAs": "RUNNING",
+    "requestKey": "084f3f0d-6991-473a-bc45-078874991c98",
+    "requestDigest": "a9e74ec74954dc6dc7aabccfef85f2208db9e67a3bbbb72efcc1f5c3ad6bc475",
+    "inputBytes": 55,
+    "outputBound": 80
+  },
+  "finishedAt": "2026-10-13T08:43:15.174Z",
+  "status": "passed"
+}

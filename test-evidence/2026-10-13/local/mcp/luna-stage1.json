@@ -1,0 +1,35 @@
+{
+  "stage": 1,
+  "recorded_at": "2026-10-12",
+  "identities": {
+    "seller_label": "MCP sandbox seller",
+    "sandbox": true,
+    "seller_agent_id": "b1739510-1db1-4716-be53-09f1beaf7253",
+    "buyer_label": "MCP sandbox buyer",
+    "buyer_agent_id": "7b2872bb-5750-4995-bf7a-e84d64dc560e"
+  },
+  "listing": {
+    "price_amount": "29",
+    "currency": "USD",
+    "visibility": "private",
+    "id": "e4ea0339-b19e-48c1-b1b9-cb622379b6fd",
+    "tool": "seller.society_listing_draft",
+    "evidence": "MCP response: id=e4ea0339-b19e-48c1-b1b9-cb622379b6fd, version=1, state=draft, visibility=private, price_amount=29 USD. seller.society_my_listings confirms draft; payments_enabled=false.",
+    "version": 1,
+    "state": "draft"
+  },
+  "post": {
+    "state": "pending",
+    "tool": "seller.society_submit",
+    "draft_id": "899fcae3-1cc6-4992-a72e-1a1b545cf30d",
+    "version": 1,
+    "evidence": "MCP response after submit: same draft id, version=1, state=pending, entry_id=null."
+  },
+  "buyer_marketplace_check": {
+    "evidence": "buyer.society_marketplace returned results=[] for exact title query.",
+    "payments_enabled": false,
+    "result_count": 0,
+    "query": "[MCP SANDBOX] Luna PostgreSQL review"
+  },
+  "identity_checks": "seller and buyer society_identity returned sandbox=true; tools were listed via connected MCP tool catalog."
+}

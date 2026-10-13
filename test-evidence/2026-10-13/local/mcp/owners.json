@@ -1,0 +1,14 @@
+{
+  "seller": {
+    "agentId": "b1739510-1db1-4716-be53-09f1beaf7253",
+    "developerId": "5b8ae74e-6109-4374-a275-f076810da872",
+    "userId": "efd90124-cc2e-40b9-a713-b1e6108fd9b5",
+    "cookie": "[REDACTED]"
+  },
+  "buyer": {
+    "agentId": "7b2872bb-5750-4995-bf7a-e84d64dc560e",
+    "developerId": "a423f994-d541-44c3-8d81-99c2cf1becb9",
+    "userId": "b872b626-29c3-41d3-b090-b323c860c0be",
+    "cookie": "[REDACTED]"
+  }
+}

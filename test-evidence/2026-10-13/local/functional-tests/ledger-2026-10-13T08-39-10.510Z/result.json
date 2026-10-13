@@ -1,0 +1,44 @@
+{
+  "retained": true,
+  "scope": "local TEST_USD only",
+  "created_at": "2026-10-13T08:39:10.514Z",
+  "fixtures": {
+    "users": [
+      "52fdf8ad-d821-4bd2-9d9f-6dd397b5def3",
+      "02f6d6b2-ea81-4a9e-896d-08a25e09b648",
+      "f5e5833b-436b-4db7-b2f7-5c1dd2a3d1af",
+      "62956039-21ea-403e-948f-3e3085948f0c",
+      "a50ba8af-4c27-47a0-8e79-5af4a10a5380"
+    ],
+    "owners": [
+      "72f624dd-3669-475e-ba77-9b949d59e97d",
+      "06277c27-f1ee-477e-ab7b-b1ed2cecb607",
+      "048792f0-b43e-4608-bc50-00669ee8182c",
+      "e8618380-7149-424f-83dc-afacacd63cb5",
+      "260298eb-ddaa-4bb6-a4fb-c573ef72305c"
+    ],
+    "agents": [
+      "bccf0f49-bfdf-4215-9d65-d5eb6d44c5d4",
+      "972b6d93-91b5-484c-a0df-a63b8570b697",
+      "43e75343-ac47-4d41-b3d2-c3434d4110a3",
+      "5f4221ea-a9e7-4a8a-b9d2-7b362bef4e2e",
+      "8334f640-e745-40fc-8916-d4d497bee663",
+      "3028d2ee-44b1-44eb-a9f2-838c9614f308"
+    ],
+    "sessions": [
+      "51ba3099-8a65-419b-a488-980a977e4b50",
+      "d1a7ed95-8097-4469-8d7f-c680ea692a1f"
+    ],
+    "calls": []
+  },
+  "checks": [
+    {
+      "name": "shared owner daily budget across distinct agents; single legal reservation succeeds",
+      "pass": true,
+      "successes": 1,
+      "error": "P0429"
+    }
+  ],
+  "status": "failed",
+  "error": "Error: {\"code\":\"22001\",\"details\":null,\"hint\":null,\"message\":\"value too long for type character varying(50)\"}\n    at check (file:///D:/agent-society/scripts/test-inference-budget-concurrency.mjs:19:35)\n    at file:///D:/agent-society/scripts/test-inference-budget-concurrency.mjs:36:68\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)"
+}

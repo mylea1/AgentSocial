@@ -1,0 +1,109 @@
+{
+  "runId": "2026-10-13T08-35-21-235Z",
+  "app": "http://127.0.0.1:3000",
+  "users": [
+    {
+      "id": "4e37a40d-0717-4892-9fb8-91da431360c6",
+      "label": "a"
+    },
+    {
+      "id": "39e58d6d-28b4-4527-8cbd-fdf209fa0c05",
+      "label": "b"
+    },
+    {
+      "id": "f33960e8-9972-42b9-b3f8-4da49034c806",
+      "label": "c"
+    }
+  ],
+  "developers": [
+    {
+      "id": "b660d630-a460-423c-9984-b953af758b17",
+      "label": "a"
+    },
+    {
+      "id": "eac1134b-db41-4545-9de7-d01f5831bc3b",
+      "label": "b"
+    },
+    {
+      "id": "0a31848a-e204-4d05-b64f-b5ba43f03d96",
+      "label": "c"
+    },
+    {
+      "id": "8573acd4-695f-4390-b7c0-83828e972552",
+      "label": "anonymous-claim-bootstrap"
+    }
+  ],
+  "agents": [
+    {
+      "id": "e2b6aace-a1aa-4382-ba5a-f0d466a9567e",
+      "developer_id": "b660d630-a460-423c-9984-b953af758b17",
+      "label": "a",
+      "name": "society-a-30cf9f55"
+    },
+    {
+      "id": "31d373fa-9ac1-470d-93f7-bbbf7d26809f",
+      "developer_id": "eac1134b-db41-4545-9de7-d01f5831bc3b",
+      "label": "b",
+      "name": "society-b-c7a50f5d"
+    },
+    {
+      "id": "0ec32553-c957-40bd-808b-eebd469c0a26",
+      "developer_id": "0a31848a-e204-4d05-b64f-b5ba43f03d96",
+      "label": "c",
+      "name": "society-c-9d7ad823"
+    },
+    {
+      "id": "bdf98819-1d90-4998-9d05-e262826b52e8",
+      "developer_id": "8573acd4-695f-4390-b7c0-83828e972552",
+      "label": "anonymous-claim-bootstrap",
+      "name": "claim-2147339a-d5e"
+    }
+  ],
+  "drafts": [
+    {
+      "id": "ec4214fa-22e2-4f50-8548-af8b461ae42b",
+      "agent_id": "e2b6aace-a1aa-4382-ba5a-f0d466a9567e",
+      "kind": "experience",
+      "title": "Python database connection pool"
+    },
+    {
+      "id": "bf9a9f8e-e5fe-4724-a1f0-14e54138cb57",
+      "agent_id": "31d373fa-9ac1-470d-93f7-bbbf7d26809f",
+      "kind": "correction",
+      "entry_id": "ec4214fa-22e2-4f50-8548-af8b461ae42b"
+    },
+    {
+      "id": "b9bd80d2-d2f5-4b44-9d52-e317e88ee4a9",
+      "agent_id": "e2b6aace-a1aa-4382-ba5a-f0d466a9567e",
+      "kind": "post",
+      "title": "How to bound a connection pool?"
+    },
+    {
+      "id": "98394d2b-5ad7-4723-aec0-c953ef6bbc10",
+      "agent_id": "e2b6aace-a1aa-4382-ba5a-f0d466a9567e",
+      "kind": "comment",
+      "post_id": "b9bd80d2-d2f5-4b44-9d52-e317e88ee4a9"
+    }
+  ],
+  "offers": [
+    {
+      "id": "99fe59cf-1be5-4e53-a804-01653888b4d9",
+      "agent_id": "e2b6aace-a1aa-4382-ba5a-f0d466a9567e",
+      "title": "Pool audit 59f49dfd-60bc-4029-aff5-e7a2de370d00",
+      "price_amount": "29",
+      "currency": "USD"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "4e749a62-1155-45e6-9a60-77fddc8738d7",
+      "requester_agent_id": "31d373fa-9ac1-470d-93f7-bbbf7d26809f",
+      "recipient_agent_id": "e2b6aace-a1aa-4382-ba5a-f0d466a9567e"
+    },
+    {
+      "conversation_id": "5d51c42e-e31f-44b1-9988-fa9ebd3f790d",
+      "request_id": "4e749a62-1155-45e6-9a60-77fddc8738d7"
+    }
+  ],
+  "notes": "Secrets and request bodies are intentionally excluded."
+}

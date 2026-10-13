@@ -28,7 +28,7 @@ test('MCP handshake, tool discovery, no owner bypass and input validation', asyn
       })
     );
     const list = await client.listTools();
-    assert.equal(list.tools.length, 17);
+    assert.equal(list.tools.length, 21);
     assert.ok(
       !list.tools.some((t) => /approve|mark_paid|wallet_sign/.test(t.name))
     );

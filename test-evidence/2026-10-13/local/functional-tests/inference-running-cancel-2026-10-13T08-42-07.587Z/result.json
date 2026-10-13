@@ -1,0 +1,15 @@
+{
+  "startedAt": "2026-10-13T08:42:07.589Z",
+  "retained": true,
+  "mode": "backend-created durable RUNNING call; no real model invocation or slow response",
+  "checks": [],
+  "sessions": [],
+  "agents": {
+    "buyer": "48360891-b1d1-4120-afb8-fc58e85d4856",
+    "seller": "47d1144f-d29d-428b-b6b3-2087cfa9b287",
+    "unrelated": "961b5fa6-b393-4774-9d9a-96d20d929c8c"
+  },
+  "fatal": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n401 !== 200\n",
+  "finishedAt": "2026-10-13T08:42:08.726Z",
+  "status": "failed"
+}

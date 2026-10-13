@@ -1,0 +1,5 @@
+{
+  "note": "Correction to the historical result.json in this directory. Its RUNNING-task check was incorrectly marked passed even though synchronous Mock SendMessage never produced a RUNNING window. The test script now records that scenario as skipped. Authoritative RUNNING cancellation validation is in D:\\agent-society\\.local\\functional-tests\\inference-running-cancel-2026-10-13T08-43-09.595Z, which creates a durable RUNNING fixture via trusted backend RPC and verifies the real HTTP A2A transitions, late completion rejection, zero charge, unrelated Agent isolation, and reservation release.",
+  "scopeCorrection": "The earlier phrase 'forged token' meant an invalid session UUID, not forged usage tokens. The test is now named '拒绝未审批会话及无效会话 ID'. Client supplied usage/cost field rejection is separately verified in the authoritative RUNNING cancellation evidence directory.",
+  "originalEvidencePreserved": true
+}

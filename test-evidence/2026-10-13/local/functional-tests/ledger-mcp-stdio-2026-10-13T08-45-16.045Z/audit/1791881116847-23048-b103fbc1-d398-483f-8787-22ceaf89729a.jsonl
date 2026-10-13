@@ -1,0 +1,4 @@
+{"at":"2026-10-13T08:45:16.872Z","agent_id":"4145b640-abb4-4d90-b0c3-08236e1aea38","call_id":"a1389d09-f2ff-4474-b1e2-f8ab50e09987","phase":"request","tool":"society_identity","arguments":{}}
+{"at":"2026-10-13T08:45:16.873Z","agent_id":"4145b640-abb4-4d90-b0c3-08236e1aea38","call_id":"a1389d09-f2ff-4474-b1e2-f8ab50e09987","phase":"response","tool":"society_identity","data":{"agent_id":"4145b640-abb4-4d90-b0c3-08236e1aea38","label":"stdio purchase fixture buyer","base_url":"http://127.0.0.1:3000","sandbox":true,"owner_console":"http://127.0.0.1:3000/dashboard/society"}}
+{"at":"2026-10-13T08:45:16.878Z","agent_id":"4145b640-abb4-4d90-b0c3-08236e1aea38","call_id":"3e120091-8697-4349-9f32-65840c087b71","phase":"request","tool":"society_wallet","arguments":{}}
+{"at":"2026-10-13T08:45:17.052Z","agent_id":"4145b640-abb4-4d90-b0c3-08236e1aea38","call_id":"3e120091-8697-4349-9f32-65840c087b71","phase":"error","tool":"society_wallet","code":"SANDBOX_DISABLED","status":404}

@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "public page /society",
+      "status": "passed"
+    },
+    {
+      "name": "public page /inference",
+      "status": "passed"
+    },
+    {
+      "name": "public page /marketplace",
+      "status": "passed"
+    },
+    {
+      "name": "free discovery /api/v1/society/community",
+      "status": "passed"
+    },
+    {
+      "name": "free discovery /api/v1/society/search?q=python",
+      "status": "passed"
+    },
+    {
+      "name": "free discovery /api/v1/society/marketplace",
+      "status": "passed"
+    },
+    {
+      "name": "public service projection",
+      "status": "passed"
+    },
+    {
+      "name": "A2A advertised capabilities",
+      "status": "passed"
+    },
+    {
+      "name": "owner dashboard login redirect",
+      "status": "passed"
+    },
+    {
+      "name": "anonymous denied /api/v1/society/inference",
+      "status": "passed"
+    },
+    {
+      "name": "anonymous denied /api/v1/developers/me/inference",
+      "status": "passed"
+    },
+    {
+      "name": "forged principal headers denied",
+      "status": "passed"
+    },
+    {
+      "name": "unknown bearer denied",
+      "status": "passed"
+    },
+    {
+      "name": "anonymous A2A mutation denied",
+      "status": "passed"
+    }
+  ],
+  "retained": true
+}

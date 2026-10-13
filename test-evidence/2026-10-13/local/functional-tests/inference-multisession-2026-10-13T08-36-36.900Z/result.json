@@ -1,0 +1,89 @@
+{
+  "startedAt": "2026-10-13T08:36:36.902Z",
+  "checks": [
+    {
+      "name": "拒绝未审批会话及伪造/无效会话 token",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n403 !== 200\n"
+    },
+    {
+      "name": "A2A、MCP 多轮调用结算及重复请求冲突",
+      "passed": false,
+      "error": "TypeError: Cannot read properties of undefined (reading 'error')"
+    },
+    {
+      "name": "暂停后拒绝调用并可恢复",
+      "passed": true,
+      "blockedStatus": 403,
+      "resumedSendStatus": 200
+    },
+    {
+      "name": "A2A GetTask/ListTasks 分页和已完成任务 CancelTask 终态错误",
+      "passed": false,
+      "error": "TypeError: Cannot read properties of undefined (reading 'id')"
+    },
+    {
+      "name": "RUNNING Task 可取消并进入终态",
+      "passed": false,
+      "error": "TypeError: Cannot read properties of undefined (reading 'error')"
+    },
+    {
+      "name": "双方发票、部分退款及退款发票",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n403 !== 200\n"
+    },
+    {
+      "name": "服务关闭后阻止新会话调用",
+      "passed": true,
+      "quoteWhileDisabled": 403,
+      "listedWhileDisabled": false
+    }
+  ],
+  "sessions": [
+    {
+      "label": "normal-multiturn",
+      "id": "a57cf420-0094-42e3-aef8-93ef5eef532c"
+    },
+    {
+      "label": "pause-resume",
+      "id": "4de04c37-3dfe-4b1a-8d61-d9bfbcb458e0"
+    },
+    {
+      "label": "a2a-pagination",
+      "id": "7c45d0b6-a793-466a-99f9-98341b23a08e"
+    },
+    {
+      "label": "cancel-task",
+      "id": "54cfd5cd-f57a-4bd5-95d3-923d03acc9d9"
+    }
+  ],
+  "retained": true,
+  "agents": [
+    "e4157fec-ed8c-4863-8a40-62b693decb1c",
+    "ecd3cf8f-50fb-420e-93c2-247b5f5d21bf"
+  ],
+  "defects": [
+    {
+      "name": "拒绝未审批会话及伪造/无效会话 token",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n403 !== 200\n"
+    },
+    {
+      "name": "A2A、MCP 多轮调用结算及重复请求冲突",
+      "error": "TypeError: Cannot read properties of undefined (reading 'error')"
+    },
+    {
+      "name": "A2A GetTask/ListTasks 分页和已完成任务 CancelTask 终态错误",
+      "error": "TypeError: Cannot read properties of undefined (reading 'id')"
+    },
+    {
+      "name": "RUNNING Task 可取消并进入终态",
+      "error": "TypeError: Cannot read properties of undefined (reading 'error')"
+    },
+    {
+      "name": "双方发票、部分退款及退款发票",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n403 !== 200\n"
+    }
+  ],
+  "finishedAt": "2026-10-13T08:36:45.219Z",
+  "status": "completed-with-failures"
+}

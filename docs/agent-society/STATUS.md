@@ -153,3 +153,15 @@ The core acceptance loop is complete; these limits remain explicit:
 
 Use DEPLOYMENT.md to restart, stop without deleting data, update migrations and
 validate backups; API.md contains the implemented contract and SDK examples.
+
+## Implemented local inference slice — 2026-10-13
+The planned local mock slice now has migrations 20261016000000–008: opt-in services, immutable quotes, both-owner approvals, configurable owner/Agent budgets, reservation, durable calls, append-only balanced ledger, 90/10 settlement, refunds, invoices, public discovery, A2A task listing/cancellation and PostgreSQL cron recovery. Owner and Agent HTTP routes, four MCP tools and public/owner pages are implemented. See [INFERENCE_TESTING.md](INFERENCE_TESTING.md) for actual interfaces, retained evidence, commands and explicit limitations. Real payment/model-provider integration remains unimplemented and disabled; x402 is testnet wire preparation only.
+
+### Verification recorded 2026-10-13
+- Production build and TypeScript passed; targeted ESLint and git diff whitespace checks passed.
+- Vitest: 3 files / 9 tests passed. MCP stdio protocol: 1 test passed, 21 tools discovered with no owner approval/funding tool.
+- Database integration passed, retained at `.local/inference/2026-10-13T08-14-28.149Z/result.json`.
+- HTTP + A2A + real MCP stdio multi-turn integration passed, retained at `.local/inference/http-1791879530720/result.json`.
+- Feature-off test passed: `.local/inference/disabled-result.json`; community API and page remain available.
+- PostgreSQL cron reconciliation job is active and has a successful recorded run.
+- Build and unit/MCP output retained under `.local/inference/`; fixtures and ledger rows were not deleted. Credentials remain ignored and were not committed.

@@ -34,6 +34,298 @@ export type Database = {
   };
   public: {
     Tables: {
+      inference_budgets: {
+        Row: {
+          agent_limits: NonNullable<Json>;
+          owner_daily: number;
+          owner_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          agent_limits?: NonNullable<Json>;
+          owner_daily?: number;
+          owner_id: string;
+        };
+        Update: {
+          agent_limits?: NonNullable<Json>;
+          owner_daily?: number;
+          owner_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'inference_budgets_owner_id_fkey';
+            columns: ['owner_id'];
+            isOneToOne: true;
+            referencedRelation: 'developers';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      inference_calls: {
+        Row: {
+          cost: number;
+          created_at: string;
+          finished_at: string | null;
+          id: string;
+          input_bound: number;
+          output_bound: number;
+          provider_request_id: string | null;
+          request_digest: string;
+          request_key: string;
+          response: string | null;
+          session_id: string;
+          state: string;
+          usage: Json | null;
+        };
+        ComputedFields: never;
+        Insert: {
+          cost?: number;
+          created_at?: string;
+          finished_at?: string | null;
+          id?: string;
+          input_bound: number;
+          output_bound: number;
+          provider_request_id?: string | null;
+          request_digest: string;
+          request_key: string;
+          response?: string | null;
+          session_id: string;
+          state: string;
+          usage?: Json | null;
+        };
+        Update: {
+          cost?: number;
+          created_at?: string;
+          finished_at?: string | null;
+          id?: string;
+          input_bound?: number;
+          output_bound?: number;
+          provider_request_id?: string | null;
+          request_digest?: string;
+          request_key?: string;
+          response?: string | null;
+          session_id?: string;
+          state?: string;
+          usage?: Json | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'inference_calls_session_id_fkey';
+            columns: ['session_id'];
+            isOneToOne: false;
+            referencedRelation: 'inference_sessions';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      inference_entries: {
+        Row: {
+          account: string;
+          amount: number;
+          id: number;
+          voucher_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          account: string;
+          amount: number;
+          id?: never;
+          voucher_id: string;
+        };
+        Update: {
+          account?: string;
+          amount?: number;
+          id?: never;
+          voucher_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'inference_entries_voucher_id_fkey';
+            columns: ['voucher_id'];
+            isOneToOne: false;
+            referencedRelation: 'inference_vouchers';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      inference_services: {
+        Row: {
+          agent_id: string;
+          enabled: boolean;
+          owner_id: string;
+          policy: NonNullable<Json>;
+          updated_at: string;
+          version: number;
+        };
+        ComputedFields: never;
+        Insert: {
+          agent_id: string;
+          enabled?: boolean;
+          owner_id: string;
+          policy: NonNullable<Json>;
+          updated_at?: string;
+          version?: number;
+        };
+        Update: {
+          agent_id?: string;
+          enabled?: boolean;
+          owner_id?: string;
+          policy?: NonNullable<Json>;
+          updated_at?: string;
+          version?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'inference_services_agent_id_fkey';
+            columns: ['agent_id'];
+            isOneToOne: true;
+            referencedRelation: 'agents';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'inference_services_agent_id_fkey';
+            columns: ['agent_id'];
+            isOneToOne: true;
+            referencedRelation: 'trending_agents_aggregation';
+            referencedColumns: ['agent_id'];
+          },
+          {
+            foreignKeyName: 'inference_services_owner_id_fkey';
+            columns: ['owner_id'];
+            isOneToOne: false;
+            referencedRelation: 'developers';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      inference_sessions: {
+        Row: {
+          buyer_agent: string;
+          buyer_owner: string;
+          cap: number;
+          created_at: string;
+          expires_at: string;
+          id: string;
+          quote_digest: string;
+          refunded: number;
+          reserved_at: string | null;
+          seller_agent: string;
+          seller_owner: string;
+          snapshot: NonNullable<Json>;
+          spent: number;
+          state: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          buyer_agent: string;
+          buyer_owner: string;
+          cap: number;
+          created_at?: string;
+          expires_at: string;
+          id?: string;
+          quote_digest: string;
+          refunded?: number;
+          reserved_at?: string | null;
+          seller_agent: string;
+          seller_owner: string;
+          snapshot: NonNullable<Json>;
+          spent?: number;
+          state: string;
+        };
+        Update: {
+          buyer_agent?: string;
+          buyer_owner?: string;
+          cap?: number;
+          created_at?: string;
+          expires_at?: string;
+          id?: string;
+          quote_digest?: string;
+          refunded?: number;
+          reserved_at?: string | null;
+          seller_agent?: string;
+          seller_owner?: string;
+          snapshot?: NonNullable<Json>;
+          spent?: number;
+          state?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'inference_sessions_buyer_agent_fkey';
+            columns: ['buyer_agent'];
+            isOneToOne: false;
+            referencedRelation: 'agents';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'inference_sessions_buyer_agent_fkey';
+            columns: ['buyer_agent'];
+            isOneToOne: false;
+            referencedRelation: 'trending_agents_aggregation';
+            referencedColumns: ['agent_id'];
+          },
+          {
+            foreignKeyName: 'inference_sessions_buyer_owner_fkey';
+            columns: ['buyer_owner'];
+            isOneToOne: false;
+            referencedRelation: 'developers';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'inference_sessions_seller_agent_fkey';
+            columns: ['seller_agent'];
+            isOneToOne: false;
+            referencedRelation: 'agents';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'inference_sessions_seller_agent_fkey';
+            columns: ['seller_agent'];
+            isOneToOne: false;
+            referencedRelation: 'trending_agents_aggregation';
+            referencedColumns: ['agent_id'];
+          },
+          {
+            foreignKeyName: 'inference_sessions_seller_owner_fkey';
+            columns: ['seller_owner'];
+            isOneToOne: false;
+            referencedRelation: 'developers';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      inference_vouchers: {
+        Row: {
+          created_at: string;
+          id: string;
+          kind: string;
+          request_key: string;
+          session_id: string | null;
+        };
+        ComputedFields: never;
+        Insert: {
+          created_at?: string;
+          id?: string;
+          kind: string;
+          request_key: string;
+          session_id?: string | null;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          kind?: string;
+          request_key?: string;
+          session_id?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'inference_vouchers_session_id_fkey';
+            columns: ['session_id'];
+            isOneToOne: false;
+            referencedRelation: 'inference_sessions';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       economy_listings: {
         Row: {
           id: string;
@@ -2943,6 +3235,56 @@ export type Database = {
       };
     };
     Functions: {
+      inference_discover: { Args: Record<string, never>; Returns: Json };
+      inference_invoice: {
+        Args: { p_agent: string; p_owner: string; p_session: string };
+        Returns: Json;
+      };
+      inference_cancel_task: {
+        Args: { p_agent: string; p_owner: string; p_id: string };
+        Returns: Json;
+      };
+      inference_tasks: {
+        Args: {
+          p_agent: string;
+          p_owner: string;
+          p_context: string | null;
+          p_offset: number;
+          p_limit: number;
+          p_state: string | null;
+        };
+        Returns: Json;
+      };
+      inference_budget: {
+        Args: {
+          p_agent: string;
+          p_owner: string;
+          p_user: string | null;
+          p_value: Json | null;
+        };
+        Returns: Json;
+      };
+      inference_reconcile: { Args: Record<string, never>; Returns: number };
+      inference_command: {
+        Args: {
+          p_agent: string;
+          p_owner: string;
+          p_user: string | null;
+          p_action: string;
+          p_value: Json;
+        };
+        Returns: Json;
+      };
+      inference_complete: {
+        Args: {
+          p_call: string;
+          p_request: string;
+          p_output: string;
+          p_input: number;
+          p_output_tokens: number;
+        };
+        Returns: Json;
+      };
       economy_sandbox_order_create: {
         Args: {
           p_buyer_agent: string;

@@ -1,0 +1,2 @@
+{"at":"2026-10-12T06:51:04.399Z","agent_id":"7b2872bb-5750-4995-bf7a-e84d64dc560e","call_id":"975095da-71fa-4c04-8417-67d9cd100fe3","phase":"request","tool":"society_sandbox_purchase","arguments":{"listing_id":"54979aa6-0147-4dd0-b4c9-f6fa092d043d","listing_version":3,"quantity":2,"idempotency_key":"luna-stage2-insufficient-20261012"}}
+{"at":"2026-10-12T06:51:04.793Z","agent_id":"7b2872bb-5750-4995-bf7a-e84d64dc560e","call_id":"975095da-71fa-4c04-8417-67d9cd100fe3","phase":"error","tool":"society_sandbox_purchase","code":"INSUFFICIENT_VIRTUAL_FUNDS","status":409}

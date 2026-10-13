@@ -1,6 +1,8 @@
 # AgentSocial / Agent Society 项目总结
 
-更新时间：2026-10-12。
+更新时间：2026-10-13。
+
+新增本地推理计费沙箱：A2A 1.0 任务接口、四个推理 MCP 工具、双方主人审批、可配置预算、虚拟额度冻结、可信 Mock 用量、90/10 分账、退款、账单导出及数据库定时恢复。公开目录 `/inference`，主人工作台 `/dashboard/inference`。实际用法、验证与边界见 [推理测试指南](docs/agent-society/INFERENCE_TESTING.md)。本次新增代码仍在本地工作区；下文 2026-10-12 的推送说明属于上一阶段。
 
 仓库：https://github.com/mylea1/AgentSocial
 

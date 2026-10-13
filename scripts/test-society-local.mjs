@@ -3,11 +3,70 @@ import { createRequire } from 'node:module';
 import { randomBytes, randomUUID } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { readFileSync, existsSync } from 'node:fs';
+import {
+  readFileSync,
+  existsSync,
+  mkdirSync,
+  writeFileSync,
+  appendFileSync,
+} from 'node:fs';
 import { SocietyClient } from '../examples/society/client.mjs';
 import { parseEnv } from 'node:util';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const runId = new Date().toISOString().replace(/[:.]/g, '-');
+const evidenceDir = path.join(
+  root,
+  '.local',
+  'functional-tests',
+  `community-${runId}`
+);
+mkdirSync(evidenceDir, { recursive: true });
+const requestLog = path.join(evidenceDir, 'requests.jsonl');
+const fixtureLog = path.join(evidenceDir, 'fixtures.json');
+const resultLog = path.join(evidenceDir, 'result.json');
+const fixtureManifest = {
+  runId,
+  app: process.env.SOCIETY_TEST_URL || 'http://127.0.0.1:3000',
+  users: [],
+  developers: [],
+  agents: [],
+  drafts: [],
+  offers: [],
+  contacts: [],
+  notes: 'Secrets and request bodies are intentionally excluded.',
+};
+writeFileSync(fixtureLog, JSON.stringify(fixtureManifest, null, 2));
+writeFileSync(
+  resultLog,
+  JSON.stringify(
+    { runId, status: 'running', startedAt: new Date().toISOString() },
+    null,
+    2
+  )
+);
+const redact = (value, key = '') => {
+  if (
+    /authorization|cookie|password|secret|token|api.?key|email|billing/i.test(
+      key
+    )
+  )
+    return '[REDACTED]';
+  if (Array.isArray(value)) return value.map((item) => redact(item));
+  if (value && typeof value === 'object')
+    return Object.fromEntries(
+      Object.entries(value).map(([k, v]) => [k, redact(v, k)])
+    );
+  if (typeof value === 'string')
+    return value
+      .replace(/\b(?:ag_)[A-Za-z0-9_-]+\b/g, '[REDACTED]')
+      .replace(/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}/g, '[REDACTED_EMAIL]');
+  return value;
+};
+function recordFixture(kind, value) {
+  fixtureManifest[kind].push(value);
+  writeFileSync(fixtureLog, JSON.stringify(fixtureManifest, null, 2));
+}
 if (existsSync(path.join(root, 'apps/web/.env.local')))
   Object.assign(
     process.env,
@@ -50,6 +109,7 @@ async function fixture(label) {
     await admin.auth.admin.createUser({ email, password, email_confirm: true })
   ).user;
   users.push(user.id);
+  recordFixture('users', { id: user.id, label });
   const dev = check(
     await admin
       .from('developers')
@@ -58,6 +118,7 @@ async function fixture(label) {
       .single()
   );
   developers.push(dev.id);
+  recordFixture('developers', { id: dev.id, label });
   check(
     await admin
       .from('developer_members')
@@ -75,6 +136,12 @@ async function fixture(label) {
       .single()
   );
   const key = `ag_${randomBytes(24).toString('hex')}`;
+  recordFixture('agents', {
+    id: agent.id,
+    developer_id: dev.id,
+    label,
+    name: agent.name,
+  });
   check(
     await admin.from('api_keys').insert({
       agent_id: agent.id,
@@ -107,13 +174,31 @@ async function api(route, who, value, key = randomUUID()) {
     headers['Content-Type'] = 'application/json';
     headers['Idempotency-Key'] = key;
   }
-  const response = await fetch(app + route, {
-    method: value ? 'POST' : 'GET',
-    headers,
-    body: value ? JSON.stringify(value) : undefined,
-  });
-  const result = await response.json();
-  return { status: response.status, ...result };
+  const method = value ? 'POST' : 'GET';
+  let response, result;
+  try {
+    response = await fetch(app + route, {
+      method,
+      headers,
+      body: value ? JSON.stringify(value) : undefined,
+    });
+    result = await response.json();
+    return { status: response.status, ...result };
+  } catch (error) {
+    result = { error: error.message };
+    throw error;
+  } finally {
+    appendFileSync(
+      requestLog,
+      JSON.stringify({
+        at: new Date().toISOString(),
+        method,
+        route,
+        status: response?.status ?? null,
+        response: redact(result),
+      }) + '\n'
+    );
+  }
 }
 const owner = (a, id = a.agent.id) =>
   `/api/v1/developers/me/society?agentId=${id}`;
@@ -207,6 +292,12 @@ try {
   );
   assert.equal(created.status, 200, JSON.stringify(created));
   const draft = created.data;
+  recordFixture('drafts', {
+    id: draft.id,
+    agent_id: a.agent.id,
+    kind: 'experience',
+    title: payload.title,
+  });
   assert.equal(
     (
       await api(
@@ -318,6 +409,12 @@ try {
       authorized: true,
     }
   );
+  recordFixture('drafts', {
+    id: correction.data?.id,
+    agent_id: b.agent.id,
+    kind: 'correction',
+    entry_id: draft.id,
+  });
   assert.equal(correction.status, 200, JSON.stringify(correction));
   assert.equal(
     (
@@ -549,6 +646,10 @@ try {
       .single()
   );
   developers.push(bootstrapDev.id);
+  recordFixture('developers', {
+    id: bootstrapDev.id,
+    label: 'anonymous-claim-bootstrap',
+  });
   const bootstrapAgent = check(
     await admin
       .from('agents')
@@ -560,6 +661,12 @@ try {
       .select()
       .single()
   );
+  recordFixture('agents', {
+    id: bootstrapAgent.id,
+    developer_id: bootstrapDev.id,
+    label: 'anonymous-claim-bootstrap',
+    name: bootstrapAgent.name,
+  });
   const claimToken = 'agclaim_' + randomBytes(32).toString('hex');
   check(
     await admin.from('agent_claim_tokens').insert({
@@ -679,6 +786,13 @@ try {
   assert.equal((await api(economyOwner, b)).status, 403);
   const listingKey = randomUUID();
   const offer = await sdkA.listingDraft(product, true, listingKey);
+  recordFixture('offers', {
+    id: offer.id,
+    agent_id: a.agent.id,
+    title: product.title,
+    price_amount: offer.payload.price_amount,
+    currency: product.price_currency,
+  });
   assert.equal(offer.payload.price_amount, '29');
   assert.equal(
     (await sdkA.listingDraft(product, true, listingKey)).id,
@@ -815,6 +929,11 @@ try {
     'postgresql',
     'Ask about safe database connection pooling'
   );
+  recordFixture('contacts', {
+    id: reverse.id,
+    requester_agent_id: b.agent.id,
+    recipient_agent_id: a.agent.id,
+  });
   assert.equal(reverse.state, 'pending');
   assert.ok(
     (await api(owner(a) + '&view=contacts', a)).data.requests.some(
@@ -830,6 +949,10 @@ try {
   const pair = (await sdkB.contacts()).sessions.find(
     (s) => s.request_id === reverse.id
   );
+  recordFixture('contacts', {
+    conversation_id: pair.id,
+    request_id: reverse.id,
+  });
   await sdkB.send(pair.id, 'How should a worker return a pooled connection?');
   await sdkA.send(
     pair.id,
@@ -918,6 +1041,12 @@ try {
     tags: ['postgresql'],
     community_id: '',
   });
+  recordFixture('drafts', {
+    id: post.id,
+    agent_id: a.agent.id,
+    kind: 'post',
+    title: 'How to bound a connection pool?',
+  });
   assert.equal((await sdkA.submit(post.id, post.version)).state, 'pending');
   assert.equal(
     (
@@ -939,6 +1068,12 @@ try {
     parent_id: '',
     content: 'Release connections after use.',
     tags: ['postgresql'],
+  });
+  recordFixture('drafts', {
+    id: reply.id,
+    agent_id: a.agent.id,
+    kind: 'comment',
+    post_id: post.id,
   });
   await sdkA.submit(reply.id, 1);
   assert.equal(
@@ -1104,14 +1239,37 @@ try {
     0,
     'New owner cannot read prior owner drafts'
   );
-  console.log(
-    'PASS: real owner Auth, independent Agent keys and SDK; marketplace proposals, exact prices, owner publication, private listings, version conflicts and transfer withdrawal; approved discovery, knowledge revisions, community approvals, private RLS, idempotency, sensitive scans, manual/automatic contacts, inbox, messages, quotas, rejection, expiry, revocation and ownership transfer.'
+  const summary =
+    'PASS: real owner Auth, independent Agent keys and SDK; marketplace proposals, exact prices, owner publication, private listings, version conflicts and transfer withdrawal; approved discovery, knowledge revisions, community approvals, private RLS, idempotency, sensitive scans, manual/automatic contacts, inbox, messages, quotas, rejection, expiry, revocation and ownership transfer.';
+  writeFileSync(
+    resultLog,
+    JSON.stringify(
+      {
+        runId,
+        status: 'passed',
+        finishedAt: new Date().toISOString(),
+        summary,
+      },
+      null,
+      2
+    )
   );
-} finally {
-  // Delete only fixture-owned rows created in this run, never reset the database.
-  for (const id of developers)
-    check(await admin.from('agents').delete().eq('developer_id', id));
-  for (const id of developers)
-    check(await admin.from('developers').delete().eq('id', id));
-  for (const id of users) check(await admin.auth.admin.deleteUser(id));
+  console.log(`${summary}\nEvidence: ${evidenceDir}`);
+} catch (error) {
+  writeFileSync(
+    resultLog,
+    JSON.stringify(
+      {
+        runId,
+        status: 'failed',
+        finishedAt: new Date().toISOString(),
+        error: { name: error.name, message: redact(error.message) },
+        stack: redact(error.stack),
+      },
+      null,
+      2
+    )
+  );
+  console.error(`FAIL: ${redact(error.message)}\nEvidence: ${evidenceDir}`);
+  throw error;
 }

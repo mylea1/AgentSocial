@@ -1,0 +1,230 @@
+
+> web@0.1.0 build D:\agent-society\apps\web
+> next build
+
+▲ Next.js 16.2.12 (Turbopack)
+- Environments: .env.local
+- Experiments (use with caution):
+  · cpus: 2
+  ✓ useTypeScriptCli
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 18.7s
+  Running TypeScript ...
+  Finished TypeScript in 5.1s ...
+  Collecting page data using 2 workers ...
+  Generating static pages using 2 workers (0/155) ...
+  Generating static pages using 2 workers (38/155) 
+  Generating static pages using 2 workers (77/155) 
+  Generating static pages using 2 workers (116/155) 
+✓ Generating static pages using 2 workers (155/155) in 4.9s
+  Finalizing page optimization ...
+
+Route (app)                                                         Revalidate  Expire
+┌ ○ /                                                                       5m      1y
+├ ○ /_not-found                                                             5m      1y
+├ ○ /about                                                                  5m      1y
+├ ○ /about/changelog                                                        5m      1y
+├ ○ /about/philosophy                                                       5m      1y
+├ ○ /agents                                                                 5m      1y
+├ ƒ /agents/[name]
+├ ○ /ai-agent-platform                                                      5m      1y
+├ ƒ /api/v1/a2a/agent-card/authorization-downgrade-cache-clearance
+├ ƒ /api/v1/a2a/agent-card/canonical-signature
+├ ƒ /api/v1/a2a/agent-card/domain-control
+├ ƒ /api/v1/a2a/agent-card/extension-governance
+├ ƒ /api/v1/a2a/agent-card/mcp-service-link
+├ ƒ /api/v1/a2a/agent-card/push-notification-callback
+├ ƒ /api/v1/a2a/agent-card/retrieval-freshness
+├ ƒ /api/v1/a2a/agent-card/security-requirement-satisfiability
+├ ƒ /api/v1/a2a/agent-card/task-history-retention
+├ ƒ /api/v1/a2a/agent-card/transport-binding-parity
+├ ƒ /api/v1/account/data-export
+├ ƒ /api/v1/activity/live-stats
+├ ƒ /api/v1/agents
+├ ƒ /api/v1/agents/[id]/analytics/stickiness
+├ ƒ /api/v1/agents/[id]/api-access-request
+├ ƒ /api/v1/agents/[id]/daily-reflection
+├ ƒ /api/v1/agents/[id]/follow
+├ ƒ /api/v1/agents/[id]/followers
+├ ƒ /api/v1/agents/[id]/following
+├ ƒ /api/v1/agents/[id]/lorebook/preview
+├ ƒ /api/v1/agents/[id]/personas
+├ ƒ /api/v1/agents/[id]/remixes
+├ ƒ /api/v1/agents/claim-token
+├ ƒ /api/v1/agents/me
+├ ƒ /api/v1/agents/me/axp/breakdown
+├ ƒ /api/v1/agents/me/memories
+├ ƒ /api/v1/agents/me/memories/[id]
+├ ƒ /api/v1/agents/me/memories/[id]/deprioritize
+├ ƒ /api/v1/agents/me/memories/[id]/retrieval-basis
+├ ƒ /api/v1/agents/me/memories/usage
+├ ƒ /api/v1/agents/me/memory-audit
+├ ƒ /api/v1/agents/me/personas
+├ ƒ /api/v1/agents/me/personas/[personaId]
+├ ƒ /api/v1/agents/me/personas/[personaId]/activate
+├ ƒ /api/v1/agents/me/reputation-export
+├ ƒ /api/v1/agents/register
+├ ƒ /api/v1/agents/status
+├ ƒ /api/v1/agents/trending
+├ ƒ /api/v1/analytics/export
+├ ƒ /api/v1/auth/refresh
+├ ƒ /api/v1/ax-score/alerts
+├ ƒ /api/v1/ax-score/alerts/[id]
+├ ƒ /api/v1/ax-score/baselines
+├ ƒ /api/v1/ax-score/baselines/[id]
+├ ƒ /api/v1/ax-score/competitors
+├ ƒ /api/v1/ax-score/competitors/[id]
+├ ƒ /api/v1/ax-score/competitors/[id]/compare
+├ ƒ /api/v1/ax-score/competitors/[id]/sites
+├ ƒ /api/v1/ax-score/competitors/[id]/sites/[siteId]
+├ ƒ /api/v1/ax-score/cron/monthly-reports
+├ ƒ /api/v1/ax-score/cron/weekly-alerts
+├ ƒ /api/v1/ax-score/erc-8004/feedback-continuity
+├ ƒ /api/v1/ax-score/generate-llmstxt
+├ ƒ /api/v1/ax-score/mcp-registry/audit
+├ ƒ /api/v1/ax-score/monthly-reports
+├ ƒ /api/v1/ax-score/monthly-reports/[id]
+├ ƒ /api/v1/ax-score/reports
+├ ƒ /api/v1/ax-score/reports/[id]
+├ ƒ /api/v1/ax-score/scan
+├ ƒ /api/v1/ax-score/simulate
+├ ƒ /api/v1/batch
+├ ƒ /api/v1/billing/checkout
+├ ƒ /api/v1/billing/portal
+├ ƒ /api/v1/billing/webhook
+├ ƒ /api/v1/chats/[chatId]/messages
+├ ƒ /api/v1/communities
+├ ƒ /api/v1/communities/[id]
+├ ƒ /api/v1/communities/[id]/join
+├ ƒ /api/v1/communities/[id]/members
+├ ƒ /api/v1/communities/[id]/posts
+├ ƒ /api/v1/companion/health
+├ ƒ /api/v1/creator/[agentId]/reach
+├ ƒ /api/v1/creator/discovery-stats
+├ ƒ /api/v1/creators/discover
+├ ƒ /api/v1/developers/claim-agent
+├ ƒ /api/v1/developers/me
+├ ƒ /api/v1/developers/me/agent-diary
+├ ƒ /api/v1/developers/me/agent-lorebook
+├ ƒ /api/v1/developers/me/agent-memories
+├ ƒ /api/v1/developers/me/agent-memories/[id]
+├ ƒ /api/v1/developers/me/agent-memory-trust
+├ ƒ /api/v1/developers/me/agent-personality
+├ ƒ /api/v1/developers/me/economy
+├ ƒ /api/v1/developers/me/proactive-controls
+├ ƒ /api/v1/developers/me/society
+├ ƒ /api/v1/developers/me/society/mcp
+├ ƒ /api/v1/distribution/x/publish
+├ ƒ /api/v1/embed
+├ ƒ /api/v1/explore
+├ ƒ /api/v1/feedback/reply-quality
+├ ƒ /api/v1/hashtags/[tag]/posts
+├ ƒ /api/v1/hashtags/trending
+├ ƒ /api/v1/health
+├ ƒ /api/v1/notifications
+├ ƒ /api/v1/notifications/read
+├ ƒ /api/v1/posts
+├ ƒ /api/v1/posts/[id]
+├ ƒ /api/v1/posts/[id]/comments
+├ ƒ /api/v1/posts/[id]/comments/[commentId]
+├ ƒ /api/v1/posts/[id]/generate-image
+├ ƒ /api/v1/posts/[id]/like
+├ ƒ /api/v1/posts/[id]/repost
+├ ƒ /api/v1/posts/[id]/upload
+├ ƒ /api/v1/reply-composer/imagine-scene
+├ ƒ /api/v1/search
+├ ƒ /api/v1/sessions/last-played
+├ ƒ /api/v1/sessions/last-story
+├ ƒ /api/v1/society/community
+├ ƒ /api/v1/society/contacts
+├ ƒ /api/v1/society/corrections
+├ ƒ /api/v1/society/drafts
+├ ƒ /api/v1/society/extract
+├ ƒ /api/v1/society/knowledge/[id]
+├ ƒ /api/v1/society/marketplace
+├ ƒ /api/v1/society/marketplace/me
+├ ƒ /api/v1/society/marks
+├ ƒ /api/v1/society/messages
+├ ƒ /api/v1/society/orders
+├ ƒ /api/v1/society/public
+├ ƒ /api/v1/society/search
+├ ƒ /api/v1/society/wallet
+├ ƒ /api/v1/stats
+├ ƒ /api/v1/stats/social-proof
+├ ƒ /api/v1/stories
+├ ƒ /api/v1/stories/[id]/view
+├ ƒ /api/v1/translate
+├ ƒ /api/v1/trust/badge/[agentId]
+├ ƒ /api/v1/user/companion-health
+├ ƒ /api/v1/user/return-context
+├ ƒ /arc/share
+├ ƒ /auth/callback
+├ ○ /auth/login                                                             5m      1y
+├ ○ /ax                                                                     5m      1y
+├ ○ /ax-score                                                               5m      1y
+├ ○ /blog/healthy-companion-use                                             5m      1y
+├ ○ /blog/long-term-companion-journey                                       5m      1y
+├ ○ /blog/why-we-wont-be-sold                                               5m      1y
+├ ƒ /dashboard
+├ ƒ /dashboard/analytics
+├ ƒ /dashboard/ax-score
+├ ƒ /dashboard/billing
+├ ƒ /dashboard/data-export
+├ ƒ /dashboard/economy
+├ ƒ /dashboard/labs
+├ ƒ /dashboard/memory-audit
+├ ƒ /dashboard/memory-export
+├ ƒ /dashboard/memory-map
+├ ƒ /dashboard/onboard
+├ ƒ /dashboard/settings
+├ ƒ /dashboard/settings/premium-preview
+├ ƒ /dashboard/society
+├ ƒ /dashboard/tune
+├ ○ /docs                                                                   5m      1y
+├ ○ /docs/api                                                               5m      1y
+├ ○ /docs/integrations/autogen                                              5m      1y
+├ ○ /docs/integrations/crewai                                               5m      1y
+├ ○ /docs/integrations/langchain                                            5m      1y
+├ ○ /docs/quickstart                                                        5m      1y
+├ ○ /explore                                                                5m      1y
+├ ○ /for-agents                                                             5m      1y
+├ ƒ /group-chat/invite/[token]
+├ ○ /guide/long-term-companion                                              5m      1y
+├ ○ /icon.png
+├ ƒ /marketplace
+├ ○ /memory-guarantee                                                       5m      1y
+├ ○ /migrate                                                                5m      1y
+├ ○ /moderation                                                             5m      1y
+├ ○ /moltbook-alternative                                                   5m      1y
+├ ○ /okara-alternative                                                      5m      1y
+├ ○ /opengraph-image.png
+├ ○ /operators/verify                                                       5m      1y
+├ ○ /playground                                                             5m      1y
+├ ƒ /posts/[id]
+├ ○ /pricing                                                                5m      1y
+├ ○ /pricing/cancel                                                         5m      1y
+├ ○ /pricing/success                                                        5m      1y
+├ ○ /privacy                                                                5m      1y
+├ ○ /refund                                                                 5m      1y
+├ ○ /replika-alternative                                                    5m      1y
+├ ○ /safety                                                                 5m      1y
+├ ○ /safety/mental-health                                                   5m      1y
+├ ƒ /session/invite/[token]
+├ ƒ /settings/context-sources
+├ ○ /sitemap.xml
+├ ○ /society                                                                5m      1y
+├ ƒ /society/knowledge/[id]
+├ ○ /templates                                                              5m      1y
+├ ○ /terms                                                                  5m      1y
+├ ○ /transparency                                                           5m      1y
+├ ○ /trust                                                                  5m      1y
+├ ○ /trust/incidents                                                        5m      1y
+└ ○ /twitter-image.png
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

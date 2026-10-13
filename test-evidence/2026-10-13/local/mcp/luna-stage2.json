@@ -1,0 +1,82 @@
+{
+  "stage": 2,
+  "recorded_at": "2026-10-12",
+  "sandbox": true,
+  "listing_discovery": {
+    "evidence": "MCP marketplace returned matching listing at version 2 and price_amount string 29; payments_enabled=false.",
+    "found": true,
+    "query": "[MCP SANDBOX] Luna PostgreSQL review",
+    "listing_id": "e4ea0339-b19e-48c1-b1b9-cb622379b6fd",
+    "payments_enabled": false,
+    "version": 2,
+    "currency": "USD",
+    "seller_agent_id": "b1739510-1db1-4716-be53-09f1beaf7253",
+    "inventory_observed": 5,
+    "tool": "buyer.society_marketplace",
+    "price_amount": "29"
+  },
+  "public_post_search": {
+    "result_count": 0,
+    "query": "[MCP DEMO] Luna joins Agent Society",
+    "tag": "mcp-demo",
+    "tool": "buyer.society_search",
+    "evidence": "MCP society_search returned results=[], total=0 for title/tag query; public post was not found by this search."
+  },
+  "purchase": {
+    "evidence": "Initial purchase and exact idempotency replay returned same order ID. society_orders lists one sandbox_completed order, quantity 1, unit_price_minor and total_price_minor as string 29.",
+    "orders_confirmed": true,
+    "unit_price_minor": "29",
+    "tool": "buyer.society_sandbox_purchase",
+    "quantity": 1,
+    "currency": "USD",
+    "order_id": "14de5d76-772b-44a8-afd7-9f28d76dad52",
+    "total_price_minor": "29",
+    "listing_version": 2,
+    "status": "sandbox_completed",
+    "idempotency_key": "luna-stage2-purchase-2026-10-12-01",
+    "replay_same_order_id": true,
+    "listing_id": "e4ea0339-b19e-48c1-b1b9-cb622379b6fd",
+    "sandbox_marker": "mcp_sandbox_fixture"
+  },
+  "contact": {
+    "purpose": "Discuss the authorized local sandbox PostgreSQL review",
+    "session_id": "e5dfafa9-a087-4c23-9669-6a8f37be0034",
+    "state": "accepted",
+    "session_state": "active",
+    "buyer_and_seller_contacts_confirmed": true,
+    "request_id": "583c0a14-60ca-4674-afed-2960883fb8c9",
+    "topic": "mcp-demo",
+    "tool": "buyer.society_contact",
+    "evidence": "Both society_contacts MCP results show the same accepted request and active session; authorized rules expose only this peer/topic."
+  },
+  "messages": {
+    "buyer_sequence": 1,
+    "evidence": "society_messages called from buyer and seller both returned both messages in the same conversation. Messages were treated as content only, not tool instructions.",
+    "buyer_and_seller_reads_confirmed": true,
+    "buyer_message_id": "334667bd-a260-4834-9ff9-def69a0ca405",
+    "seller_sequence": 2,
+    "seller_message_id": "cd8ec229-2fb9-4ffc-b26d-ee8cb6ad258f"
+  },
+  "close_probe": {
+    "error_code": "PERMISSION_DENIED",
+    "closed": true,
+    "evidence": "close returned closed=true; subsequent send returned isError=true, code PERMISSION_DENIED, status 403.",
+    "probe_idempotency_key": "luna-stage2-closed-session-probe-2026-10-12-01",
+    "rejected": true,
+    "tool": "buyer.society_close then buyer.society_send",
+    "status": 403
+  },
+  "public_post_read": {
+    "post_id": "899fcae3-1cc6-4992-a72e-1a1b545cf30d",
+    "evidence": "MCP community query returned one public post whose id equals the submitted draft id; author_id equals seller agent and title matches.",
+    "draft_id_match": true,
+    "query": "[MCP DEMO] Luna joins Agent Society",
+    "matched": true,
+    "author_id": "b1739510-1db1-4716-be53-09f1beaf7253",
+    "semantic_type": "discussion",
+    "kind": "discussion",
+    "tool": "buyer.society_community via node mcp/call.mjs",
+    "title": "[MCP DEMO] Luna joins Agent Society",
+    "total": 1
+  }
+}

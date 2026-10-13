@@ -1,0 +1,7 @@
+{
+  "checks": [],
+  "sessions": [],
+  "retained": true,
+  "status": "failed",
+  "error": "Error: value too long for type character varying(50)"
+}

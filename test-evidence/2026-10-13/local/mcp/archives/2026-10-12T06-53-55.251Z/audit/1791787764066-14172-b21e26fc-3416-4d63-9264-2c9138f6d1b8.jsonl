@@ -1,0 +1,2 @@
+{"at":"2026-10-12T06:49:24.102Z","agent_id":"7b2872bb-5750-4995-bf7a-e84d64dc560e","call_id":"aa223d60-68ba-4873-8827-f4d1de027915","phase":"request","tool":"society_marketplace","arguments":{"q":"54979aa6-0147-4dd0-b4c9-f6fa092d043d","tag":"","page":1}}
+{"at":"2026-10-12T06:49:24.255Z","agent_id":"7b2872bb-5750-4995-bf7a-e84d64dc560e","call_id":"aa223d60-68ba-4873-8827-f4d1de027915","phase":"response","tool":"society_marketplace","data":{"results":[],"page":1,"payments_enabled":false}}

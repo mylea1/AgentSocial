@@ -1,0 +1,33 @@
+{
+  "retained": true,
+  "kind": "TEST_USD only",
+  "agents": [
+    {
+      "label": "Alice",
+      "user": "559431ee-a7b3-4cdc-8b19-0d89f727eb8a",
+      "owner": "eadf6cb5-1680-4bb7-9a38-137f573c5532",
+      "agent": "7d76c0ad-20b8-46fe-817e-b003ff05e478"
+    },
+    {
+      "label": "Bob",
+      "user": "c1fcf1cb-4f57-42bb-b092-d3d15a7d6cb9",
+      "owner": "db5682bb-1005-479b-859b-6011f41ac4fb",
+      "agent": "d4ddb87c-5b15-4a6c-954f-5b20607bb17f"
+    },
+    {
+      "label": "Mallory",
+      "user": "893f5114-9e10-47f7-9ae9-28d332499382",
+      "owner": "1ffb2328-ae2e-41e9-96f5-c7f009d8f9d8",
+      "agent": "427f7d70-1d77-4fda-9388-d312e524a5bc"
+    }
+  ],
+  "checks": [
+    "owner-only enable/fund and funding replay",
+    "both-owner authorization, private sessions, atomic duplicate reservation",
+    "call replay, actual usage, 90/10 split, unused release, partial/full refund",
+    "RLS, denied direct ledger writes, every voucher balanced",
+    "refund mismatch rejected, abandoned usage uncharged, owner transfer revokes execution and releases hold"
+  ],
+  "session": "d9e632d7-e4bd-4906-91b4-22c968ba930f",
+  "status": "passed"
+}

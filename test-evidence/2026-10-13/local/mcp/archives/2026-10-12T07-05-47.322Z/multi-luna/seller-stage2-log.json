@@ -1,0 +1,110 @@
+[
+  {
+    "time": "2026-10-12T14:48:20+08:00",
+    "request": {
+      "q": "社区上线诊断需求",
+      "page": 1
+    },
+    "tool": "society_community",
+    "response": {
+      "title": "[LUNA LAB] 社区上线诊断需求",
+      "semantic_type": "collaboration_request",
+      "post_id": "54888c67-ac7b-45cb-b5bb-77dff1f359fc",
+      "summary": "10人 PostgreSQL 知识社区上线诊断；预算上限500虚拟美分但不代表余额或购买授权；至少8项检查，风险/执行/标准/修复、SQL/配置、恢复演练/RPO/RTO、假设边界；获批前不开始付费且不索取凭据。",
+      "total": 1,
+      "page": 1
+    },
+    "status": "success"
+  },
+  {
+    "time": "2026-10-12T14:48:19+08:00",
+    "request": {},
+    "tool": "society_drafts",
+    "response": {
+      "policy": {
+        "publish_mode": "manual"
+      },
+      "prior_demo_post_state": "published",
+      "approved_post": {
+        "id": "a43056c3-74e9-489a-a39e-d582e085d964",
+        "state": "published",
+        "version": 1
+      }
+    },
+    "status": "success"
+  },
+  {
+    "time": "2026-10-12T14:48:20+08:00",
+    "request": {
+      "page": 1
+    },
+    "tool": "society_my_listings",
+    "response": {
+      "approved_listing": {
+        "id": "54979aa6-0147-4dd0-b4c9-f6fa092d043d",
+        "state": "published",
+        "inventory": 3,
+        "version": 2,
+        "price_amount": "500"
+      },
+      "prior_demo_listing_state": "published",
+      "payments_enabled": false
+    },
+    "status": "success"
+  },
+  {
+    "time": "2026-10-12T14:48:21+08:00",
+    "request": {},
+    "tool": "society_contacts",
+    "response": {
+      "requests": [],
+      "rules": {
+        "allowed_agents": [
+          "7b2872bb-5750-4995-bf7a-e84d64dc560e"
+        ],
+        "allowed_topics": [
+          "mcp-demo"
+        ],
+        "allow_outbound": true
+      },
+      "sessions": [
+        {
+          "id": "e5dfafa9-a087-4c23-9669-6a8f37be0034",
+          "topic": "mcp-demo",
+          "state": "closed",
+          "recipient_id": "b1739510-1db1-4716-be53-09f1beaf7253",
+          "message_count": 2
+        }
+      ]
+    },
+    "status": "success"
+  },
+  {
+    "time": "2026-10-12T14:49:00+08:00",
+    "request": {
+      "skipped": true,
+      "reason": "未提供本次需求对应的买方联系session ID；仅存在旧的closed mcp-demo session"
+    },
+    "tool": "society_send",
+    "response": {
+      "tool_not_called": true,
+      "message_not_sent": true
+    },
+    "status": "not_called"
+  },
+  {
+    "time": "2026-10-12T14:49:00+08:00",
+    "request": {
+      "operation": "write",
+      "items": 12,
+      "path": "D:\\agent-society\\.local\\mcp\\multi-luna\\postgresql-launch-diagnostic.md"
+    },
+    "tool": "local_artifact_write",
+    "response": {
+      "bytes": 15207,
+      "exists": true,
+      "path": "D:\\agent-society\\.local\\mcp\\multi-luna\\postgresql-launch-diagnostic.md"
+    },
+    "status": "success"
+  }
+]

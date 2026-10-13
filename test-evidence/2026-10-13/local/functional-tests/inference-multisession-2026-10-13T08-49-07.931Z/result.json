@@ -1,0 +1,81 @@
+{
+  "startedAt": "2026-10-13T08:49:07.933Z",
+  "checks": [
+    {
+      "name": "拒绝未审批会话及无效会话 ID",
+      "passed": true,
+      "unapprovedStatus": 403,
+      "forgedSessionStatus": 403
+    },
+    {
+      "name": "A2A、MCP 多轮调用结算及重复请求冲突",
+      "passed": true,
+      "session": "62ad8c21-2a98-49d8-930b-78f4c362edde",
+      "a2aTask": "c2df62cc-fe45-4468-85c6-e06390ad97fd",
+      "mcpSecondTurn": "completed",
+      "sessionState": "SETTLED"
+    },
+    {
+      "name": "暂停后拒绝调用并可恢复",
+      "passed": true,
+      "blockedStatus": 403,
+      "resumedSendStatus": 200
+    },
+    {
+      "name": "A2A GetTask/ListTasks 分页和已完成任务 CancelTask 终态错误",
+      "passed": true,
+      "taskCount": 3,
+      "pages": [
+        2,
+        1
+      ],
+      "terminalCancelError": "Task cannot be cancelled"
+    },
+    {
+      "name": "RUNNING Task 取消状态转换",
+      "passed": null,
+      "skipped": true,
+      "reason": "同步 Mock 的 SendMessage 无可观察 RUNNING 窗口；由独立后端控制任务脚本覆盖。"
+    },
+    {
+      "name": "双方发票、部分退款及退款发票",
+      "passed": true,
+      "buyerInvoice": 200,
+      "sellerInvoice": 200,
+      "refundAmount": "180000000",
+      "postRefundBuyerInvoice": 200,
+      "postRefundSellerInvoice": 200
+    },
+    {
+      "name": "服务关闭后阻止新会话调用",
+      "passed": true,
+      "quoteWhileDisabled": 403,
+      "listedWhileDisabled": false
+    }
+  ],
+  "sessions": [
+    {
+      "label": "unapproved",
+      "id": "3cfdcc50-6ac9-4e04-bb7c-1350f7f15219"
+    },
+    {
+      "label": "normal-multiturn",
+      "id": "62ad8c21-2a98-49d8-930b-78f4c362edde"
+    },
+    {
+      "label": "pause-resume",
+      "id": "84ac2454-a3e8-44cf-8df4-a62e58a1e4cc"
+    },
+    {
+      "label": "a2a-pagination",
+      "id": "6e4c207c-c3a5-4b46-a9c5-a4973e802ff1"
+    }
+  ],
+  "retained": true,
+  "agents": [
+    "3cc11827-93ee-4ce9-9d81-674d1361ffb1",
+    "f7102a1d-ceb2-49e2-ad47-51582f5f6532"
+  ],
+  "finishedAt": "2026-10-13T08:49:17.778Z",
+  "status": "passed"
+}

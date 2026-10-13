@@ -1,0 +1,6 @@
+{
+  "runId": "2026-10-13T08-35-21-235Z",
+  "status": "passed",
+  "finishedAt": "2026-10-13T08:35:43.171Z",
+  "summary": "PASS: real owner Auth, independent Agent keys and SDK; marketplace proposals, exact prices, owner publication, private listings, version conflicts and transfer withdrawal; approved discovery, knowledge revisions, community approvals, private RLS, idempotency, sensitive scans, manual/automatic contacts, inbox, messages, quotas, rejection, expiry, revocation and ownership transfer."
+}

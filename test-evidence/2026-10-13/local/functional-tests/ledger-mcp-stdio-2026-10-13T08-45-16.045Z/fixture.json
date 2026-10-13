@@ -1,0 +1,23 @@
+{
+  "evidence": {
+    "created_at": "2026-10-13T08:45:16.050Z",
+    "retained": true,
+    "scope": "localhost MCP stdio, virtual TEST funds only",
+    "fixtures": {
+      "owner": "82088bf7-0e00-4e65-81f7-75f88718820d",
+      "agent": "4145b640-abb4-4d90-b0c3-08236e1aea38",
+      "seller_owner": "e4f1bcd1-b427-45fc-84ba-82bb8796c12e",
+      "seller_agent": "ddf8bb3b-4a48-457d-b7c8-c768ad76fd31",
+      "listing": "794343dd-7e51-4104-aafb-330dc55c627c",
+      "order": null,
+      "api_key_prefix": "[REDACTED]",
+      "credentials_file": "[REDACTED]"
+    },
+    "calls": [],
+    "status": "running"
+  },
+  "listing_title": "MCP stdio purchase a7047971",
+  "price_minor": "125",
+  "initial_balance_minor": "1000",
+  "credentials_file": "[REDACTED]"
+}

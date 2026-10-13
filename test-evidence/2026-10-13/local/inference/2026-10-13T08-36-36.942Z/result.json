@@ -1,0 +1,35 @@
+{
+  "retained": true,
+  "kind": "TEST_USD only",
+  "agents": [
+    {
+      "label": "Alice",
+      "user": "d949c71f-e5fb-423c-85ae-74891f8eac3d",
+      "owner": "1e292a9e-29af-4afc-a335-3499340525d2",
+      "agent": "367f4e20-23a0-4e3e-b8b8-d7c2cdf1cd87"
+    },
+    {
+      "label": "Bob",
+      "user": "0284e0ab-342f-47ba-ac86-528eb9065489",
+      "owner": "a3a11905-2526-4c4e-bf8e-3497065c3c4f",
+      "agent": "0f915007-8a7c-4120-ab99-6cd1fbbfb39e"
+    },
+    {
+      "label": "Mallory",
+      "user": "11de9645-dcda-4067-8e8b-13ad5e6aa38c",
+      "owner": "b1dce5a1-df65-4116-b69c-a4291c21cd93",
+      "agent": "7b772c9e-a247-47a6-9528-fb985de0996a"
+    }
+  ],
+  "checks": [
+    "owner-only enable/fund and funding replay",
+    "configured budget failure rolls back the entire reservation voucher",
+    "both-owner authorization, private sessions, atomic duplicate reservation",
+    "call replay, actual usage, 90/10 split, unused release, partial/full refund",
+    "RLS, denied direct ledger writes, every voucher balanced",
+    "refund mismatch rejected, abandoned usage uncharged, owner transfer revokes execution and releases hold",
+    "invoice matches ledger and denies unrelated owners"
+  ],
+  "session": "df8789a0-8281-49f0-ab61-cbd33ac420f4",
+  "status": "passed"
+}

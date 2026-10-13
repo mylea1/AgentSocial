@@ -20,6 +20,7 @@ type RouteExport = {
 };
 
 const PUBLIC_API_ROUTE_EXPORTS = new Set([
+  'society/inference/services/route.ts#GET',
   'society/marketplace/route.ts#GET',
   'society/public/route.ts#GET',
   'society/search/route.ts#GET',

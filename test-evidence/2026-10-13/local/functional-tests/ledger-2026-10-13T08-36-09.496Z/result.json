@@ -1,0 +1,75 @@
+{
+  "retained": true,
+  "scope": "local TEST_USD only",
+  "created_at": "2026-10-13T08:36:09.497Z",
+  "fixtures": {
+    "users": [
+      "cae01ff8-9571-4fa2-9442-5b0b527590bd",
+      "4609cfd7-b038-4d63-afab-7031be57246b",
+      "25e8b6f4-c142-44ee-ab6c-2b7a9dca4111",
+      "ab7883d9-2c36-49ba-b81f-bc749e5e2fda",
+      "5b760abe-e0fd-47d8-bb87-be0adb107e6f"
+    ],
+    "owners": [
+      "2936e9af-5c89-46eb-bccf-5ff4b3498e89",
+      "10da0e63-3a6d-443b-91be-7dd38339f58f",
+      "a9c88a0e-1de1-4a80-9ed4-f335b147c262",
+      "baa3385b-33bc-4fdd-897e-9b8da2589d18",
+      "f392b0da-3f05-4c6a-97ca-d8b13312c778"
+    ],
+    "agents": [
+      "975320c4-2ae7-467c-8c31-dbf09ec9aac1",
+      "c4de9575-181c-4407-96d3-6bdefb7806f5",
+      "de339de4-735b-4ada-a673-1ce1d23e4fd7",
+      "9bd2f1f2-3653-4b3b-b68c-8802511d5f31",
+      "34ba70e3-31d4-4c80-bfbf-2074846c4520",
+      "864b5384-ed43-48f9-b608-9c9a34249a0a"
+    ],
+    "sessions": [
+      "e91f5d2c-dce0-45ed-b9f3-302d6d521ca8",
+      "4399c3e8-7803-4eba-add1-d44739d85af8",
+      "e9c295d0-ccd3-41bf-ad18-cc519a08baa4",
+      "761a473d-d0c3-4c62-8854-85ecc83c2581",
+      "2bef3d6a-8081-44cd-8732-6f8d8a55c5a3",
+      "7cd9480c-2134-43f9-aca0-387c9936d0fe"
+    ],
+    "calls": [
+      "78488ab3-5944-4370-84ed-414aaa6fe8b5",
+      "f6cbe94c-51e3-479f-bb9b-73ee6678f394",
+      "473636f8-74de-406a-a34e-4b0c85f73819"
+    ]
+  },
+  "checks": [
+    {
+      "name": "shared owner daily budget across distinct agents; single legal reservation succeeds",
+      "pass": true,
+      "successes": 1,
+      "error": "P0429"
+    },
+    {
+      "name": "same provider concurrency cap allows exactly one simultaneous successful begin",
+      "pass": true
+    },
+    {
+      "name": "concurrency capacity becomes available after prior call completes",
+      "pass": true
+    },
+    {
+      "name": "low balance rejected and funds unchanged",
+      "pass": true
+    },
+    {
+      "name": "duplicate refund replay does not credit twice",
+      "pass": true
+    },
+    {
+      "name": "RLS and direct writes denied",
+      "pass": true
+    },
+    {
+      "name": "crash recovery fails stale call and settles hold without charging unknown usage",
+      "pass": true
+    }
+  ],
+  "status": "passed"
+}

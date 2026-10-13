@@ -1,0 +1,87 @@
+{
+  "retained": true,
+  "scope": "local TEST_USD only",
+  "created_at": "2026-10-13T08:39:29.674Z",
+  "fixtures": {
+    "users": [
+      "1bea7f46-69b0-47e8-bed3-87153d04d039",
+      "2a3913ee-d0b4-42a6-80e1-24838b439823",
+      "42e11766-251b-41e4-90ae-4a8c3dc564aa",
+      "514b666c-35aa-42a3-a562-ac302ecc3d81",
+      "45b9d63f-96fa-4f0e-878c-e53913ad14c9",
+      "21664f14-74ec-430d-879f-dc57dcf22bdd"
+    ],
+    "owners": [
+      "6f332dfa-c195-4f31-9c42-4b9ff16d923d",
+      "1fd95fd1-5f14-4af1-a6e0-862ea00ebd40",
+      "1c260169-3281-41dd-88d8-144a10ac6028",
+      "f519aad2-4adc-466b-bb56-bec0f413b50e",
+      "dd8e91b0-7b95-4ec3-a252-7506ed40c948",
+      "2abd1be5-a037-439b-9ef4-765c67ff63d2"
+    ],
+    "agents": [
+      "56c91927-742e-42c3-a78b-f961cc7e8046",
+      "842c9e51-5aeb-4068-bc33-f1a5257199ca",
+      "0f163a40-9024-4787-9676-fde702328747",
+      "562852fe-c702-42d6-99e7-2d50d0a769e5",
+      "f9f4d492-9b7b-4d97-95b2-33c93b14a65f",
+      "d477556a-f4ae-4bbc-9f06-b60bcfb0ed05",
+      "993fb206-b045-4eac-af46-32771c94b9b9",
+      "7ce1f0fa-d90f-4dd5-b59f-581218873016"
+    ],
+    "sessions": [
+      "b0c47e46-5133-47a4-8d3f-c284e621a841",
+      "23c19b12-4937-49c5-a877-7cadc70bd5bb",
+      "8b42ff61-2e63-4e35-af3f-34dfe3392c31",
+      "32dffb0b-031a-4ada-a84c-39b9df6071a7",
+      "585abb1b-f984-4753-80d4-8d91b0fb66f1",
+      "2f0a7a62-af27-40b5-9b38-e4d4f1cb816c",
+      "1b47762d-faee-4ae4-9500-bcaeae0fe96d",
+      "05fd8289-090e-4958-a0fe-3878c4472660"
+    ],
+    "calls": [
+      "fa3f41b2-8061-4a31-a025-088db77acb71",
+      "6a9af039-bd67-4cb4-8fc2-94fc66f601fa",
+      "dba1759d-ffb8-4f13-9986-4405f36c9977"
+    ]
+  },
+  "checks": [
+    {
+      "name": "shared owner daily budget across distinct agents; single legal reservation succeeds",
+      "pass": true,
+      "successes": 1,
+      "error": "P0429"
+    },
+    {
+      "name": "parallel distinct sessions cannot reserve beyond shared available balance",
+      "pass": true,
+      "successes": 1,
+      "rejectedFor": "insufficient mock funds"
+    },
+    {
+      "name": "same provider concurrency cap allows exactly one simultaneous successful begin",
+      "pass": true
+    },
+    {
+      "name": "concurrency capacity becomes available after prior call completes",
+      "pass": true
+    },
+    {
+      "name": "low balance rejected and funds unchanged",
+      "pass": true
+    },
+    {
+      "name": "duplicate refund replay does not credit twice",
+      "pass": true
+    },
+    {
+      "name": "RLS and direct writes denied",
+      "pass": true
+    },
+    {
+      "name": "crash recovery fails stale call and settles hold without charging unknown usage",
+      "pass": true
+    }
+  ],
+  "status": "passed"
+}

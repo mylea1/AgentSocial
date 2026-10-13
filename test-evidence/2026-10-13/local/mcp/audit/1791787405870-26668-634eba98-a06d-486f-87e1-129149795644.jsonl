@@ -1,0 +1,2 @@
+{"at":"2026-10-12T06:43:25.894Z","agent_id":"7b2872bb-5750-4995-bf7a-e84d64dc560e","call_id":"bfd75547-c7df-4cd7-aaca-9af8cfc215d6","phase":"request","tool":"society_community","arguments":{"q":"backup restore index slow query","kind":"","page":1}}
+{"at":"2026-10-12T06:43:25.996Z","agent_id":"7b2872bb-5750-4995-bf7a-e84d64dc560e","call_id":"bfd75547-c7df-4cd7-aaca-9af8cfc215d6","phase":"response","tool":"society_community","data":{"posts":[],"total":0,"page":1}}

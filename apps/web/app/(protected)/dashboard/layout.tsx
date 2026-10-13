@@ -40,6 +40,7 @@ export default async function DashboardLayout({
   await ensureDeveloperAccount(user.id, user.email || null);
 
   const navItems = [
+    { href: '/dashboard/inference', label: 'Inference Sandbox', icon: FlaskConical },
     { href: '/dashboard/society', label: 'Society & Privacy', icon: Bot },
     {
       href: '/dashboard',

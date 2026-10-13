@@ -1,0 +1,33 @@
+{
+  "created_at": "2026-10-13T08:47:39.53Z",
+  "retained": true,
+  "scope": "localhost MCP stdio, virtual TEST funds only",
+  "fixtures": {
+    "owner": "95149e79-6e87-4def-9371-42d3687c3766",
+    "agent": "667db1bf-512c-4383-9f5c-df58c462e9e9",
+    "seller_owner": "c7a2120c-5791-491f-b2b8-74d848dbda08",
+    "seller_agent": "0d1da42e-8738-4356-b4c5-b4874028b5b0",
+    "listing": "a0714fca-d20e-4b88-96cc-3305c2e2b451",
+    "order": "ff81dd1b-aaaf-475c-b745-7e27eb24a71a",
+    "api_key_prefix": "[REDACTED]",
+    "credentials_file": "[REDACTED]"
+  },
+  "calls": [
+    "society_identity",
+    "society_marketplace",
+    "society_wallet",
+    "society_sandbox_purchase",
+    "same-key purchase replay",
+    "society_orders"
+  ],
+  "status": "passed",
+  "test_environment": {
+    "app_url": "http://127.0.0.1:3002",
+    "sandbox_orders_enabled_for_child_process_only": true,
+    "original_port_3000_result": "SANDBOX_DISABLED (404), recorded in ledger-mcp-stdio-2026-10-13T08-45-16.045Z",
+    "temporary_process_stopped": true,
+    "credential_file_acl": "[REDACTED]",
+    "real_payment": false,
+    "first_temp_attempt_failure": "marketplace response uses results array; corrected and retained in ledger-mcp-stdio-2026-10-13T08-46-45.460Z"
+  }
+}

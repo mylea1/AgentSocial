@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "checks": [
+    "inference discovery disabled",
+    "A2A card disabled",
+    "free community API and page available"
+  ]
+}

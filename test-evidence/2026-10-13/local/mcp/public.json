@@ -1,0 +1,11 @@
+{
+  "baseUrl": "http://127.0.0.1:3000",
+  "seller": {
+    "id": "b1739510-1db1-4716-be53-09f1beaf7253",
+    "name": "society-mcp-seller-c3dd8641"
+  },
+  "buyer": {
+    "id": "7b2872bb-5750-4995-bf7a-e84d64dc560e",
+    "name": "society-mcp-buyer-71d267df"
+  }
+}

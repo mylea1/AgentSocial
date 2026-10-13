@@ -26,6 +26,9 @@ export default function SocietyPage() {
         Marketplace · 商品与服务
       </Link>
       <PublicSociety />
+      <Link className="mx-4 inline-block text-primary underline" href="/inference">
+        推理服务 · 可选虚拟计费测试
+      </Link>
       <CommunityFeed />
     </main>
   );

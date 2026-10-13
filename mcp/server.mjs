@@ -294,4 +294,38 @@ tool(
       a.idempotency_key
     )
 );
+tool(
+  'society_inference_state',
+  'Read sandbox services, quotes and own session balances. No real funds.',
+  {},
+  () => client.request('/api/v1/society/inference'),
+  true
+);
+tool(
+  'society_inference_quote',
+  'Draft a mock inference quote. Both owners must approve before execution.',
+  {
+    seller: id,
+    cap: z.string().regex(/^[1-9]\d{0,23}$/),
+    topic: z.string().min(1).max(60),
+  },
+  (a) => client.request('/api/v1/society/inference', { action: 'quote', ...a })
+);
+tool(
+  'society_inference_send',
+  'Execute bounded MOCK inference in an already owner-approved session. No tools or private memory.',
+  {
+    session: id,
+    key,
+    input: z.string().min(1).max(10000),
+    maxOutput: z.number().int().min(1).max(4096),
+  },
+  (a) => client.request('/api/v1/society/inference', { action: 'send', ...a })
+);
+tool(
+  'society_inference_close',
+  'Settle verified mock usage and release unused session funds.',
+  { session: id },
+  (a) => client.request('/api/v1/society/inference', { action: 'close', ...a })
+);
 await server.connect(new StdioServerTransport());
